@@ -88,6 +88,11 @@ h4 {
   padding-bottom: 0.5em;
   letter-spacing: 3px;
 }
+/*Positionnement texte*/
+.centre {
+  text-align: center;
+}
+
 /*Navigation haut*/
 
 nav {
@@ -127,6 +132,15 @@ nav {
   rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 /*Fin navigation haut fin*/
+
+/*Position*/
+.postion_button {
+  display: flex;
+  justify-content: center;
+}
+
+
+/*Fin Position*/
 
 /*Formulaire*/
 .formulaire {
@@ -169,3 +183,6 @@ label {
   margin-bottom: 0.5em;
 }
 /*Fin Formulaire*/
+/*==Flex==*/
+
+/*==Fin flex==*/

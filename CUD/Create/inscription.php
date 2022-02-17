@@ -2,43 +2,57 @@
 require '../../objets/paramDB.php';
 require '../../objets/cud.php';
 require '../../objets/readDB.php';
+require '../../objets/controleInscription.php';
+require '../../objets/preparationRequette.php';
 include '../fonctionsDB.php';
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Controle Formulaire en amont
-$stop = 1;
-$dataForm = [filter($_POST['nom']), filter($_POST['prenom']), filter($_POST['login']), filter($_POST['mdp'])];
-  for ($i=0; $i < count($dataForm) ; $i++) {
-    if (empty($dataForm[$i])) {
-      $stop = 0;
-    }
-}
-// Fin controle formulaire
-if ($stop == 1) {
-  $nom = filter($_POST['nom']);
-  $prenom = filter($_POST['prenom']);
-  $login = filter($_POST['login']);
-  $requetteSQL = "SELECT `login` FROM `users` WHERE `login` = :login";
-  $prepare = [['prep'=> ':login', 'variable' => $login],];
-  $controle = new readDB($requetteSQL, $prepare);
-  $doublon = $controle->read();
-  if (empty($doublon[0]['login'])) {
-    $moria = filter($_POST['mdp']);
-    $mdp = haschage($moria);
-    $requetteSQL = "INSERT INTO `users`(`nom`, `prenom`, `login`, `mdp`)
-    VALUES (:nom, :prenom, :login, :mdp)";
-      $prepare = [['prep'=> ':nom', 'variable' => $nom],
-        ['prep'=> ':prenom', 'variable' => $prenom],
-        ['prep'=> ':login', 'variable' => $login],
-        ['prep'=> ':mdp', 'variable' => $mdp]];
-        $dataUser = new CurDB($requetteSQL, $prepare);
-        $dataUser->actionDB();
-    //  header('location:../../index.php?message=Nouvelle inscription validée');
+if(filter($_POST['valide'] === NULL)) {
+  header('location:../../index.php?message=Il faut accepter les CGU pour créer un compte.');
+} else {
+
+  // Contrôle doublon de login et de mail dans la DB
+  $sql = "SELECT  `login` FROM `users` WHERE `login`= :login";
+  $preparation = ':login';
+  $valeur = filter($_POST['login']);
+  $test = new ControleInscription();
+  $testLogin = $test->doublon($sql, $preparation , $valeur);
+  $sql = "SELECT `email`FROM `users` WHERE `email`=:email";
+  $preparation = ':email';
+  $valeur = filter($_POST['email']);
+  $testEmail = $test->doublon($sql, $preparation , $valeur);
+  $verificationDoublon = $testLogin + $testEmail;
+
+// vérification des Doublon de login et email
+  if($verificationDoublon > 0) {
+    header('location:../../index.php?message=Login ou mail déjà utilisé.');
   } else {
-//  header('location:../../index.php?message=Login déjà utilisé.');
+    //Si pas de doublon on continue
+    $_POST = doublePOP($_POST);
+    $_POST['mdp'] = haschage(filter($_POST['mdp']));
+    // génération du token
+    $_POST['token'] = genToken(12);
+    // fin de génération du token
+      $preparation =  new Preparation();
+      $param = $preparation->creationPrep($_POST);
+      $insertUser = "INSERT INTO `users`(`login`, `nom`, `prenom`, `email`, `genre`, `mdp`, `token`)
+      VALUES (:login, :nom, :prenom, :email, :genre, :mdp, :token)";
+      $insert = new CurDB($insertUser, $param);
+      print_r($param);
+     $action = $insert->actionDB();
+     /*
+     $to = filter($_POST['email']);
+     $subject = 'Votre token d'activation';
+     $message = 'Bonjour ; Votre token .$_POST['token']';
+     */
+      header('location:../../index.php?message=Utilisateur enregistré vous devriez recevoir un mail avec votre token pour activer votre compte.');
+
   }
+
+}
   } else {
   //  header('location:../../index.php?message=Il y a comme un lézard numérique');
 }
-}
+
 
  ?>

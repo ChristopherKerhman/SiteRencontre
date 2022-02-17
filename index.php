@@ -1,5 +1,7 @@
 <?php
 include 'environnement/header.php';
+// Message d'avertissement
+if(isset($_GET['message'])){ echo '<h3 class="centre">'.filter($_GET['message']).'</h3>'; }
 // Blocage pour débloquer, mettre l'élément ligne 4 en commentaire.
 //$_GET['idNav'] = 0;
 // $Dev = 1 affichage des chemins / $dev = 0 chemin non affiché.
