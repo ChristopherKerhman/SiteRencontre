@@ -15,7 +15,7 @@ if(filter($_POST['valide'] === NULL)) {
   $sql = "SELECT  `login` FROM `users` WHERE `login`= :login";
   $preparation = ':login';
   $valeur = filter($_POST['login']);
-  $test = new ControleInscription();
+  $test = new Controle();
   $testLogin = $test->doublon($sql, $preparation , $valeur);
   $sql = "SELECT `email`FROM `users` WHERE `email`=:email";
   $preparation = ':email';
@@ -38,7 +38,7 @@ if(filter($_POST['valide'] === NULL)) {
       $insertUser = "INSERT INTO `users`(`login`, `nom`, `prenom`, `email`, `genre`, `mdp`, `token`)
       VALUES (:login, :nom, :prenom, :email, :genre, :mdp, :token)";
       $insert = new CurDB($insertUser, $param);
-      print_r($param);
+
      $action = $insert->actionDB();
      /*
      $to = filter($_POST['email']);
@@ -51,7 +51,7 @@ if(filter($_POST['valide'] === NULL)) {
 
 }
   } else {
-  //  header('location:../../index.php?message=Il y a comme un lézard numérique');
+ header('location:../../index.php?message=Il y a comme un lézard numérique');
 }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-class ControleInscription {
+class Controle {
   public function doublon($sql, $preparation , $valeur) {
     /* $sql doit être une requette sql, $préparation doit prendre
     la forme :preparation et $valeur c'est la valeur du doublon à tester.*/

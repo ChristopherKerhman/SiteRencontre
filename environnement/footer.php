@@ -1,7 +1,7 @@
 <footer>
-<p>
-  Footer
-</p>
+<nav>
+    Copyrigth &copy; <?=date('Y')?>
+</nav>
 </footer>
 </body>
 

@@ -25,7 +25,7 @@
 </form>
 <div id="VERROU" class="postion_button">
     <button v-show="!cle" type="button" name="button" v-on:click="cle = true">Activer votre compte</button>
-      <form v-if="cle" class="formulaire"  action="CUD/Update/inscription" method="post">
+      <form v-if="cle" class="formulaire"  action="CUD/Update/inscription.php" method="post">
         <label for="token">Token de sécurité ?</label>
         <input type="password" name="token" required>
         <button type="submit" name="button">Activer votre compte</button>

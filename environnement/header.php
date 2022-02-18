@@ -1,7 +1,7 @@
 <?php
 session_start();
 $titre = "Faite vous des amis !";
-$sousTitre = "Site pour créer des amitiés le temps d'une rencontre ou toute la vie";
+$sousTitre = "Une amitiés dure le temps d'une rencontre ou toute la vie";
 function filter($data) {
   $data = trim($data);
   $data = stripslashes($data);
