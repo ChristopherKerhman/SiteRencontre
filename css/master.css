@@ -86,7 +86,7 @@ h1 {
   margin-left: 0.25em;
   margin-top: 0.25em;
   font-family: 'Luckiest Guy', cursive;
-  color: #E9C46A;
+  color: #E76F51;;
   font-size: 3em;
   padding-bottom: 0.5em;
   letter-spacing: 3px;
@@ -95,24 +95,36 @@ h2 {
     margin-left: 0.25em;
     margin-top: 0.25em;
     font-family: 'Luckiest Guy', cursive;
-    color: #E9C46A;
+    color: #E76F51;;
     font-size: 1.6em;
+      margin-left: 1em;
     padding-bottom: 0.5em;
     letter-spacing: 3px;
 }
 h3 {
   font-family: 'Luckiest Guy', cursive;
-  color: #E9C46A;
+  color: #E76F51;;
   font-size: 1.5em;
+    margin-left: 1em;
   padding-bottom: 0.5em;
   letter-spacing: 3px;
 }
 h4 {
   font-family: 'Luckiest Guy', cursive;
-  color: #E9C46A;
-  font-size: 1.2em;
+  color: #E76F51;;
+  font-size: 1.1em;
   padding-bottom: 0.5em;
+  margin-left: 1em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
   letter-spacing: 3px;
+}
+form {
+  margin-bottom: 1em;
+}
+ul {
+  margin-left: 0.75em;
+  list-style: none;
 }
 /*Positionnement texte*/
 .centre {
@@ -132,7 +144,7 @@ h4 {
   font-family: 'Luckiest Guy', cursive;
   text-transform: uppercase;
   text-decoration: none;
-  color: #F4A261;
+  color: #E76F51;
   margin-right: 2em;
   background-color: #E9C46A;
   border-radius: 4px;
@@ -159,6 +171,21 @@ h4 {
 /*Fin Position*/
 
 /*Formulaire*/
+#titreSortie {
+  font-size: 1.5em;
+}
+#lieu {
+  font-size: 1.5em;
+  width: 50%;
+}
+#codePostal {
+  font-size: 1.5em;
+  width: 5em;
+}
+#price {
+  list-style: none;
+
+}
 .formulaire {
   padding: 0.75em;
   display: flex;
@@ -167,17 +194,19 @@ h4 {
   justify-content: center;
 }
 input, select {
-  width: 12em;
+  width: auto;
   font-size: 1em;
   font-style: italic;
   color: grey;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 button {
   margin-top: 1em;
   font-family: 'Luckiest Guy', cursive;
-  font-size: 2em;
+  font-size: 1.2em;
   text-transform: uppercase;
-  color: #F4A261;
+  color: #E76F51;
   background-color: #E9C46A;
   border-radius: 4px;
   padding-top: 0.35em;
@@ -202,3 +231,28 @@ label {
 /*==Flex==*/
 
 /*==Fin flex==*/
+/*==Mosaïque==*/
+.gallery {
+   margin: 100px auto 0;
+   padding: 0 20px;
+  max-width:100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 500px);
+ grid-gap: 10px;
+ justify-content: center;
+}
+.item {
+min-height: 500px;
+min-width: 500px;
+background: #264653;
+color: white;
+font-size: 1.5em;
+ border-radius: 5px;
+display: flex;
+align-items: center;
+justify-content: center;
+border: 1px solid #E9C46A;
+border-radius: 5px;
+
+}
+/*==Mosaïque==*/

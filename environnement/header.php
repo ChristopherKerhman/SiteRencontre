@@ -1,5 +1,8 @@
 <?php
 session_start();
+// Pass sanitaire
+$pass = 1;
+// Fin Pass Sanitaire
 $titre = "Faite vous des amis !";
 $sousTitre = "Une amitiés dure le temps d'une rencontre ou toute la vie";
 function filter($data) {
@@ -53,3 +56,5 @@ $idNav = $dataNav[0]['idNav'];
           </ul>
         </nav>
   </header>
+<main>
+  

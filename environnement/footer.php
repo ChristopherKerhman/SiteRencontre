@@ -1,3 +1,5 @@
+
+</main>
 <footer>
 <nav>
     Copyrigth &copy; <?=date('Y')?>

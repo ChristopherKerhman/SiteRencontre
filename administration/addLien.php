@@ -3,12 +3,13 @@ include 'administration/securite.php';
 $yes = ['non', 'oui'];
 $admin = ['Visiteur', 'Utilisateur', 'Createur', 'Administrateur' ];
  ?>
+ <h4>Ajouter un nouveau Lien</h4>
  <form action="CUD/Create/lien.php" method="post">
  <label for="nom"> Nom Lien</label>
  <input id="nomLien" class="inputFormulaire" type="text" name="nomLien">
  <label for="chemin">Chemin lien</label>
  <input id="chemin" class="inputFormulaire" type="text" name="cheminNav">
- <label for="levelAdmi">Niveau d\'administration</label>
+ <label for="levelAdmi">Niveau d'administration</label>
  <select class="inputFormulaire" name="levelAdmi">
    <?php
  for ($i=0; $i < count($admin)  ; $i++) {
@@ -18,7 +19,7 @@ $admin = ['Visiteur', 'Utilisateur', 'Createur', 'Administrateur' ];
  </select>
  <label for="ordre">ordre</label>
  <input id="ordre" class="inputFormulaireNumber" type="number" min="0" max="10" name="ordre" value="'.$key['ordre'].'">
- <button class="buttonAdmin" type="submit" name="button">Créer</button>
+ <button type="submit" name="button">Créer</button>
  </form>
 
 <?php
@@ -35,19 +36,19 @@ $dataNav = $lien->readNav();
   <article class="">
     <ul>
       <li><h4>Les liens des visiteurs</h4></li>
-      <?php $lien->lienVisiteurs($dataNav); ?>
+      <?php $lien->lien($dataNav, 0); ?>
     </ul>
     <ul>
       <li><h4>Les liens des utilisateurs</h4></li>
-      <?php $lien->lienUtilisateurs($dataNav); ?>
+    <?php $lien->lien($dataNav, 1); ?>
     </ul>
     <ul>
       <li><h4>Les liens des modérateurs</h4></li>
-      <?php $lien->lienModerateurs($dataNav); ?>
+    <?php $lien->lien($dataNav, 2); ?>
     </ul>
     <ul>
       <li><h4>Les liens des administrateurs</h4></li>
-      <?php $lien->lienAdministrateurs($dataNav); ?>
+    <?php $lien->lien($dataNav, 3); ?>
     </ul>
   </article>
 </section>
