@@ -1,5 +1,4 @@
 <?php
-
 class Controle {
   public function doublon($sql, $preparation , $valeur) {
     /* $sql doit être une requette sql, $préparation doit prendre

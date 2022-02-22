@@ -8,11 +8,26 @@ $date = $day.'/'.$month.'/'.$year;
 return $date;
 }
 class Sorties {
-public function sortieCreateByUser($idUser) {
+public function oneSortie($idSortie) {
   $selectSortie = "SELECT `idSortie`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
-  `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`
+  `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`, `type`
   FROM `sorties`
   INNER JOIN `users` ON `idUser` = `id_User`
+  INNER JOIN `types` ON `idTypeSortie` = `type`
+  WHERE `idSortie` = :idSortie";
+  $param = [['prep'=>':idSortie', 'variable'=>$idSortie]];
+  $listeSortie = new readDB($selectSortie, $param);
+  $dataSortie = $listeSortie->read();
+  return $dataSortie;
+}
+
+
+public function sortieCreateByUser($idUser) {
+  $selectSortie = "SELECT `idSortie`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
+  `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`
+  FROM `sorties`
+  INNER JOIN `users` ON `idUser` = `id_User`
+  INNER JOIN `types` ON `idTypeSortie` = `type`
   WHERE `sorties`.`valide` = 1 AND `id_User` = :idUser";
   $param = [['prep'=>':idUser', 'variable'=>$idUser]];
   $listeSortie = new readDB($selectSortie, $param);
@@ -21,10 +36,11 @@ public function sortieCreateByUser($idUser) {
 }
 public function lastSortie($limit, $valide) {
   $selectSortie = "SELECT `idSortie`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
-  `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`
+  `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`
   FROM `sorties`
   INNER JOIN `users` ON `idUser` = `id_User`
-  WHERE `sorties`.`valide` = :valide
+  INNER JOIN `types` ON `type` = `idTypeSortie`
+  WHERE `sorties`.`valide` = :valide AND `partager` = 1 AND `adult` = 0
   ORDER BY `idSortie`
   LIMIT {$limit}";
   $param=[['prep'=>':valide', 'variable'=>$valide]];
@@ -44,6 +60,7 @@ public function affichageSortie($data) {
       <ul>
       <li><h4>'.$value['titreSortie'].'</h4></li>
       <li><strong>Créer par : '.$value['login'].'</strong></li>
+      <li><strong>'.$value['typeSortie'].'</strong></li>
       <li><p>
       '.$value['texteSortie'].'
       </p></li>
@@ -68,6 +85,7 @@ public function administrationSortie($data, $nav){
       echo '  <div class="item">
       <ul>
       <li><h4>'.$value['titreSortie'].'</h4></li>
+            <li><strong>'.$value['typeSortie'].'</strong></li>
       <li><p>
       '.$value['texteSortie'].'
       </p></li>
@@ -76,17 +94,20 @@ public function administrationSortie($data, $nav){
       <li>Heure du rendez-vous : '.$value['heureSortie'].'</li>
       <li>Prix : '.$value['prix'].' €</li></strong>
       <li>Adresse : '.$value['lieu'].'</li>
-      <li>
+      <li class="flexLigne">
+      <a class="lienSite" href="index.php?idNav=27&idSortie='.$value['idSortie'].'">modifier</a>
       <form class="formulaire" action="CUD/Delette/sortie.php" method="post">
       <input type="hidden" name="idSortie" value="'.$value['idSortie'].'">
       <input type="hidden" name="idNav" value="'.$nav.'">
       <button type="submit" name="button">Supprimer</button>
       </form>
+
       </li>
       </ul>
       </div>';
     }
   echo '</div>';
 }
+
 
 }

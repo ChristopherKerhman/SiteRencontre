@@ -222,6 +222,9 @@ button:hover {
   rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
 }
+.suppression {
+  margin-left: 1em;
+}
 label {
   font-size: 2em;
   margin-top: 0.25em;
@@ -229,7 +232,13 @@ label {
 }
 /*Fin Formulaire*/
 /*==Flex==*/
-
+.flexLigne {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: flex-start;
+  align-items: baseline;
+}
 /*==Fin flex==*/
 /*==Mosaïque==*/
 .gallery {

@@ -1,3 +1,4 @@
+
 <form class="formulaire" action="CUD/Create/sortie.php" method="post">
   <h3>Créer une nouvelle sortie <?=$_SESSION['login']; ?> ?</h3>
   <label for="titreSortie">Titre de votre sortie</label>
@@ -9,7 +10,7 @@
 <li>
   <label for="gratuit">La sortie est elle gratuite ?</label>
     <select id="gratuit" name="gratuit" v-model="gratuit">
-      <option value="0" select>Oui</option>
+      <option value="0" selected>Oui</option>
       <option value="1">Non</option>
     </select>
 </li>
@@ -49,12 +50,25 @@
 <?php if($pass == 1) { ?>
   <label for="pass">Pass Sanitaire obligatoire ?</label>
 <select id="pass" name="passSanitaire">
-  <option value="0" select>Oui</option>
+  <option value="0" selected>Oui</option>
   <option value="1">Non</option>
 </select>
 <?php } ?>
-</div>
+<?php
+// Liste des sorties disponible
+$triType = "SELECT `idTypeSortie`, `typeSortie` FROM `types` WHERE `valide` = 1 ORDER BY `typeSortie`";
+$param = [];
+$triTypesSorties = new readDB($triType, $param);
+$dataTypesSortie = $triTypesSorties->read();
 
+ ?>
+<label for="type">Type de sortie ?</label>
+<select id="type" name="type">
+  <?php foreach ($dataTypesSortie as $key => $value) {
+    echo '<option value="'.$value['idTypeSortie'].'">'.$value['typeSortie'].'</option>';
+} ?>
+</select>
+</div>
   <button type="submit" name="button">Créer</button>
 </form>
 <script>
