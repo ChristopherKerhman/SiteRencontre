@@ -43,17 +43,29 @@ $dataSortie = $oneSortie->oneSortie($idSortie);
    <h4>Adresse </h4>
    <label for="lieu">adresse de la sortie ?</label>
    <input id="lieu" type="text" name="lieu" value="<?=$dataSortie[0]['lieu']?>" required>
-   <label for="codePostale">Code postal du rendez-vous ?</label>
-   <input id="codePostal" type="text" name="codePostal" maxlength="5" value="<?=$dataSortie[0]['codePostal']?>" required>
+   <label for="codePostal">Numéro du département de la sortie ?</label>
+   <select id="codePostal" name="codePostal">
+     <?php
+     for ($i=1; $i <= 103 ; $i++) {
+       if($dataSortie[0]['codePostal'] == $i){
+         echo '<option value="'.$i.'" selected>'.$i.'</option>';
+       } else {
+            echo '<option value="'.$i.'">'.$i.'</option>';
+       }
+
+     }
+
+      ?>
+   </select>
  <div>
  <label for="adult">Sortie interdit aux mineurs ?</label>
  <select name="adult">
    <?php if($dataSortie[0]['adult'] >0) {
-     echo '    <option value="0" >Oui</option>
-          <option value="1" selected>Non</option>';
+     echo '    <option value="0" >Non</option>
+          <option value="1" selected>Oui</option>';
    } else {
-     echo '    <option value="0" selected>Oui</option>
-          <option value="1" >Non</option>';
+     echo '    <option value="0" selected>Non</option>
+          <option value="1" >Oui</option>';
    } ?>
 
  </select>
@@ -61,23 +73,23 @@ $dataSortie = $oneSortie->oneSortie($idSortie);
  <label for="partager">Partager cette sortie ?</label>
  <select id="partager" name="partager">
    <?php if($dataSortie[0]['partager'] >0) {
-     echo '    <option value="0" >Oui</option>
-          <option value="1" selected>Non</option>';
+     echo '    <option value="0" >Non</option>
+          <option value="1" selected>Oui</option>';
    } else {
-     echo '    <option value="0" selected>Oui</option>
-          <option value="1" >Non</option>';
+     echo '    <option value="0" selected>Non</option>
+          <option value="1">Oui</option>';
    } ?>
  </select>
 
  <?php if($pass == 1) { ?>
    <label for="pass">Pass Sanitaire obligatoire ?</label>
  <select id="pass" name="passSanitaire">
-   <?php if($dataSortie[0]['passSanitaire'] >0) {
+   <?php if($dataSortie[0]['passSanitaire'] > 0) {
+     echo '    <option value="1" selected>Oui</option>
+          <option value="0">Non</option>';
+   } else {
      echo '    <option value="1" >Oui</option>
           <option value="0" selected>Non</option>';
-   } else {
-     echo '    <option value="1" selected>Oui</option>
-          <option value="0" >Non</option>';
    } ?>
  </select>
  <?php } ?>

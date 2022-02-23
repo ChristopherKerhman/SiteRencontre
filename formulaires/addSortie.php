@@ -32,8 +32,15 @@
   <h4>Adresse </h4>
   <label for="lieu">adresse de la sortie ?</label>
   <input id="lieu" type="text" name="lieu" required>
-  <label for="codePostale">Code postal du rendez-vous ?</label>
-  <input id="codePostal" type="text" name="codePostal" maxlength="5" required>
+  <label for="codePostal">Numéro du département de la sortie ?</label>
+  <select id="codePostal" name="codePostal">
+    <?php
+    for ($i=1; $i <= 103 ; $i++) {
+      echo '<option value="'.$i.'">'.$i.'</option>';
+    }
+
+     ?>
+  </select>
 <div>
 <label for="adult">Sortie interdit aux mineurs ?</label>
 <select name="adult">

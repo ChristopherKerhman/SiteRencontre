@@ -119,6 +119,11 @@ h4 {
   margin-bottom: 0.5em;
   letter-spacing: 3px;
 }
+#message {
+  font-family: serif;
+  color: red;
+  font-size: 2em;
+}
 .texteCenter {
   text-align: center;
 }

@@ -21,6 +21,7 @@ class SortieUtilisateur {
     AND `dateSortie` >= :dateSortie
     ORDER BY `dateSortie`
     LIMIT {$limit}";
+
     $param=[['prep'=>':typeSortie', 'variable'=>$type],
             ['prep'=>':passSanitaire', 'variable'=>$pass],
             ['prep'=>':gratuit', 'variable'=>$gratuit],
@@ -32,7 +33,6 @@ class SortieUtilisateur {
     return $dataSortie;
   }
   public function InscriptionSortie($data) {
-
     echo '<div class="gallery">';
       foreach ($data as $key => $value) {
         $count = "SELECT COUNT(`idRencontre`) AS `nbr` FROM `rencontres` WHERE `id_Sortie` = :idSortie";
@@ -88,5 +88,8 @@ class SortieUtilisateur {
         echo'</div>';
       }
     echo '</div>';
+  }
+  public function sortiePrevus() {
+
   }
 }

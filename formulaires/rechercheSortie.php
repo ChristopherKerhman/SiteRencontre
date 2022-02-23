@@ -91,11 +91,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   <ul class="message">
   <li>Pas encore de données trouvées.</li>
   <li>  Il ne reste plus qu\'à créer votre sortie ?<br /></li>
-  <li><a class="lienSite" href="index.php?idNav=24">Ajouter sortie</a></li>
+  <li><a class="lienSite" href="index.php?idNav=24">Ajouter une sortie</a></li>
   </ul>
-
   </div></div>';
 }
-
  ?>
 </article >
