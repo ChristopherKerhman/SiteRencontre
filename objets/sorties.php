@@ -1,12 +1,5 @@
 <?php
-function brassageDate($data) {
-$date = $data;
-$year = substr($date,0,4);
-$month = substr($date,5,2);
-$day = substr($date,8,2);
-$date = $day.'/'.$month.'/'.$year;
-return $date;
-}
+include 'functionDateTime.php';
 class Sorties {
 public function oneSortie($idSortie) {
   $selectSortie = "SELECT `idSortie`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
@@ -20,15 +13,14 @@ public function oneSortie($idSortie) {
   $dataSortie = $listeSortie->read();
   return $dataSortie;
 }
-
-
 public function sortieCreateByUser($idUser) {
   $selectSortie = "SELECT `idSortie`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
   `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`
   FROM `sorties`
   INNER JOIN `users` ON `idUser` = `id_User`
   INNER JOIN `types` ON `idTypeSortie` = `type`
-  WHERE `sorties`.`valide` = 1 AND `id_User` = :idUser";
+  WHERE `sorties`.`valide` = 1 AND `id_User` = :idUser
+  ORDER BY `dateSortie`, `heureSortie`";
   $param = [['prep'=>':idUser', 'variable'=>$idUser]];
   $listeSortie = new readDB($selectSortie, $param);
   $dataSortie = $listeSortie->read();
@@ -41,7 +33,7 @@ public function lastSortie($limit, $valide) {
   INNER JOIN `users` ON `idUser` = `id_User`
   INNER JOIN `types` ON `type` = `idTypeSortie`
   WHERE `sorties`.`valide` = :valide AND `partager` = 1 AND `adult` = 0
-  ORDER BY `idSortie`
+  ORDER BY `idSortie` DESC
   LIMIT {$limit}";
   $param=[['prep'=>':valide', 'variable'=>$valide]];
   $listeSortie = new readDB($selectSortie, $param);
@@ -66,7 +58,7 @@ public function affichageSortie($data) {
       </p></li>
       <strong><li>Personnes inscrite :'.$dataCount[0]['nbr'].'/'.$value['nombreMax'].'</li>
       <li>Date '.brassageDate($value['dateSortie']).'</li>
-      <li>Heure du rendez-vous : '.$value['heureSortie'].'</li>
+      <li>Heure du rendez-vous : '.heure($value['heureSortie']).'</li>
       <li>Prix : '.$value['prix'].' €</li></strong>
       <li>Adresse du rendez-vous : '.$value['lieu'].'</li>
       </ul>
@@ -91,7 +83,7 @@ public function administrationSortie($data, $nav){
       </p></li>
       <strong><li>Personnes inscrite :'.$dataCount[0]['nbr'].'/'.$value['nombreMax'].'</li>
       <li>Date '.brassageDate($value['dateSortie']).'</li>
-      <li>Heure du rendez-vous : '.$value['heureSortie'].'</li>
+      <li>Heure du rendez-vous : '.heure($value['heureSortie']).'</li>
       <li>Prix : '.$value['prix'].' €</li></strong>
       <li>Adresse : '.$value['lieu'].'</li>
       <li class="flexLigne">
@@ -108,6 +100,4 @@ public function administrationSortie($data, $nav){
     }
   echo '</div>';
 }
-
-
 }

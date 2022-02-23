@@ -73,11 +73,11 @@ $dataSortie = $oneSortie->oneSortie($idSortie);
    <label for="pass">Pass Sanitaire obligatoire ?</label>
  <select id="pass" name="passSanitaire">
    <?php if($dataSortie[0]['passSanitaire'] >0) {
-     echo '    <option value="0" >Oui</option>
-          <option value="1" selected>Non</option>';
+     echo '    <option value="1" >Oui</option>
+          <option value="0" selected>Non</option>';
    } else {
-     echo '    <option value="0" selected>Oui</option>
-          <option value="1" >Non</option>';
+     echo '    <option value="1" selected>Oui</option>
+          <option value="0" >Non</option>';
    } ?>
  </select>
  <?php } ?>

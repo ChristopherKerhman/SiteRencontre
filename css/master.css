@@ -119,6 +119,9 @@ h4 {
   margin-bottom: 0.5em;
   letter-spacing: 3px;
 }
+.texteCenter {
+  text-align: center;
+}
 form {
   margin-bottom: 1em;
 }
@@ -126,6 +129,11 @@ ul {
   margin-left: 0.75em;
   list-style: none;
 }
+/*Class lier au liste*/
+.message li{
+  margin-bottom: 0.5em;
+}
+/*Class lier au liste*/
 /*Positionnement texte*/
 .centre {
   text-align: center;
@@ -238,6 +246,16 @@ label {
   flex-wrap: nowrap;
   align-content: flex-start;
   align-items: baseline;
+}
+.colonne {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2em;
+}
+.ligne {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2em;
 }
 /*==Fin flex==*/
 /*==Mosaïque==*/

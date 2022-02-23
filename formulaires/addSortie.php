@@ -50,8 +50,8 @@
 <?php if($pass == 1) { ?>
   <label for="pass">Pass Sanitaire obligatoire ?</label>
 <select id="pass" name="passSanitaire">
-  <option value="0" selected>Oui</option>
-  <option value="1">Non</option>
+  <option value="0" selected>Non</option>
+  <option value="1">Oui</option>
 </select>
 <?php } ?>
 <?php
