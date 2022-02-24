@@ -1,7 +1,7 @@
 <?php
 $dateDujour = date('y-m-d');
-require 'objets/sorties.php';
-require 'objets/sortieUtilisateur.php';
+require 'objets/getSorties.php';
+require 'objets/printSortie.php';
  ?>
  <article class="ligne">
 <form class="colonne" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?idNav='.$idNav; ?>" method="post">
@@ -23,7 +23,7 @@ require 'objets/sortieUtilisateur.php';
       echo '<option value="'.$value['idTypeSortie'].'">'.$value['typeSortie'].'</option>';
   } ?>
   </select>
-  <label for="codePostale">Code postale ?</label>
+  <label for="codePostale">Numéro du département ?</label>
   <?php
   $triCodeP = "SELECT `codePostal` FROM `sorties`
   WHERE `partager` = 1 AND `valide` = 1 AND `dateSortie` >= :dateSortie";
@@ -59,7 +59,6 @@ require 'objets/sortieUtilisateur.php';
 </form>
 <?php
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $resultat = new SortieUtilisateur();
   $limit = filter($_POST['limit']);
   $date = filter($_POST['dateSortie']);
   $type = filter($_POST['type']);
@@ -67,8 +66,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $gratuit = filter($_POST['gratuit']);
   $adult = filter($_POST['adult']);
   $codePostale = filter($_POST['codePostale']);
-  $dataSortie = $resultat->triSortie($limit, $type, $pass,$gratuit, $adult, $codePostale, $date);
-  $resultat->InscriptionSortie($dataSortie);
+  // Affichage sortie
+  $affichageSorties = new PrintSortie();
+  $dataSortie = $affichageSorties->triSortie($limit, $type, $pass,$gratuit,$adult, $codePostale, $date);
   if($dataSortie == array()){
     $triType = "SELECT `idTypeSortie`, `typeSortie` FROM `types` WHERE `idTypeSortie` = :idTypeSortie";
     $param = [['prep'=>':idTypeSortie', 'variable'=>$type]];
@@ -83,8 +83,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <li>  Il ne reste plus qu\'à créer votre sortie ?<br /></li>
     <li><a class="lienSite" href="index.php?idNav=24">Ajouter sortie</a></li>
     </ul>
-
     </div></div>';
+  } else {
+    $affichageSorties->InscriptionSortie($dataSortie);
   }
 } else {
   echo '<div class="gallery">
