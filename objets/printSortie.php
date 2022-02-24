@@ -1,8 +1,6 @@
 <?php
-
 class PrintSortie extends GetSorties {
   public function affichageSortie($data) {
-
     echo '<div class="gallery">';
       foreach ($data as $key => $value) {
         $count = "SELECT COUNT(`idRencontre`) AS `nbr` FROM `rencontres` WHERE `id_Sortie` = :idSortie";
@@ -154,9 +152,10 @@ class PrintSortie extends GetSorties {
       $param = [['prep'=>'id_Sortie', 'variable'=>$value['idSortie']]];
       $inscrit = new readDB($liste, $param);
       $dataTraiter = $inscrit->read();
-      foreach ($dataTraiter as $key => $value) {
-        echo '<li>'.$value['login'].'</li>';
+      foreach ($dataTraiter as $key => $valeur) {
+        echo '<li>'.$valeur['login'].'</li>';
       }
+      echo '<li><a class="lienSite" href="index.php?idNav=31&idSortie='.$value['idSortie'].'">Espace commentaires</a></li>';
       echo'</ul>';
       echo'</div>';
     }

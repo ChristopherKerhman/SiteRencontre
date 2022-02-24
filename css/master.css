@@ -143,6 +143,12 @@ ul {
 .centre {
   text-align: center;
 }
+.commentaires {
+  font-size: 1.2em;
+  border: 1px solid #E9C46A;
+  padding: 1em;
+  margin-bottom: 0.25em;
+}
 
 /*Navigation haut*/
 
