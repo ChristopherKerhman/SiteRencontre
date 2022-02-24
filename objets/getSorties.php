@@ -65,7 +65,7 @@ class GetSorties {
     INNER JOIN `sorties` ON `id_Sortie` = `idSortie`
     INNER JOIN `types` ON `type` = `idTypeSortie`
     INNER JOIN `users` ON `idUser` = `sorties`.`id_User`
-    WHERE `rencontres`.`id_User` = :idUser";
+    WHERE `rencontres`.`id_User` = :idUser AND `sorties`.`valide` = 1";
     $param = [['prep'=>':idUser', 'variable'=>$this->idUser]];
     $listeSortie = new readDB($tri, $param);
     $dataSortie = $listeSortie->read();
