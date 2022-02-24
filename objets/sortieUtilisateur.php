@@ -1,6 +1,6 @@
 <?php
-include 'functionDateTime.php';
-class SortieUtilisateur {
+
+class SortieUtilisateur extends Sorties {
   public function __construct(){
     $this->date = date('Y-m-d');
     $this->idUser = $_SESSION['idUser'];
@@ -21,7 +21,6 @@ class SortieUtilisateur {
     AND `dateSortie` >= :dateSortie
     ORDER BY `dateSortie`
     LIMIT {$limit}";
-
     $param=[['prep'=>':typeSortie', 'variable'=>$type],
             ['prep'=>':passSanitaire', 'variable'=>$pass],
             ['prep'=>':gratuit', 'variable'=>$gratuit],
@@ -90,6 +89,15 @@ class SortieUtilisateur {
     echo '</div>';
   }
   public function sortiePrevus() {
-
+    $tri = "SELECT `id_Sortie`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
+    `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `partager`, `typeSortie`
+    FROM `rencontres`
+    INNER JOIN `sorties` ON `id_Sortie` = `idSortie`
+    INNER JOIN `types` ON `type` = `idTypeSortie`
+    WHERE `rencontres`.`id_User` = :idUser AND `sorties`.`valide` = 1 AND `partager` = 1";
+    $param = [['prep'=>':idUser', 'variable'=>$this->idUser]];
+    $read = new readDB($tri, $param);
+    $dataTraiter = $read->read();
+    return $dataTraiter;
   }
 }

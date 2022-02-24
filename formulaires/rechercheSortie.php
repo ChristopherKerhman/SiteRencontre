@@ -1,5 +1,6 @@
 <?php
 $dateDujour = date('y-m-d');
+require 'objets/sorties.php';
 require 'objets/sortieUtilisateur.php';
  ?>
  <article class="ligne">
