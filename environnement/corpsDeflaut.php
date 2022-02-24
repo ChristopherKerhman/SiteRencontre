@@ -1,11 +1,9 @@
 <?php
-require 'objets/sorties.php';
-$nbr = 6;
-$Rencontres = new Sorties();
-// Sortie créer par l'utilisateur
-$dataSorties = $Rencontres->lastSortie($nbr, 1);
- ?>
-<article>
-  <h3>Les <?=$nbr?> dernières sorties organisé</h3>
-<?php $Rencontres->affichageSortie($dataSorties);  ?>
-</article>
+require 'objets/getSorties.php';
+require 'objets/printSortie.php';
+// Déclaration des variables
+$limit = 6;
+$valide = 1;
+$lastSortie =  new PrintSortie();
+$dataTraiter = $lastSortie->lastSortie($limit, $valide);
+$lastSortie->affichageSortie($dataTraiter);

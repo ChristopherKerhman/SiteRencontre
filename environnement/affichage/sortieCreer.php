@@ -1,8 +1,7 @@
+<h3>Les sorties que vous avez créées</h3>
 <?php
-require 'objets/sorties.php';
-$Rencontres = new Sorties();
-// Sortie créer par l'utilisateur
-$dataSorties = $Rencontres->sortieCreateByUser($_SESSION['idUser']);
- ?>
-<h3>Les sorties organisé par vos soins</h3>
-<?php $Rencontres->administrationSortie($dataSorties, $idNav) ?>
+require 'objets/getSorties.php';
+require 'objets/printSortie.php';
+$mySortie = new PrintSortie();
+$dataTraiter = $mySortie->sortieCreateByUser();
+$mySortie->administrationSortie($dataTraiter, $idNav);
