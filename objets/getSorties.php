@@ -11,7 +11,7 @@ class GetSorties {
     FROM `sorties`
     INNER JOIN `users` ON `idUser` = `id_User`
     INNER JOIN `types` ON `type` = `idTypeSortie`
-    WHERE `sorties`.`valide` = :valide AND `partager` = 1 AND `adult` = 0 AND `dateSortie` >= :dayday
+    WHERE `sorties`.`valide` = :valide AND `partager` = 1 AND `adult` = 0 AND `passer` = :dayday
     ORDER BY `idSortie` DESC
     LIMIT {$limit}";
     $param=[['prep'=>':valide', 'variable'=>$valide], ['prep'=>':dayday', 'variable'=>$this->date]];

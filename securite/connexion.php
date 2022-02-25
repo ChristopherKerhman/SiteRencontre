@@ -24,6 +24,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['role'] = $dataUser[0]['role'];
     $_SESSION['login']= $dataUser[0]['login'];
     $_SESSION['valide'] = $dataUser[0]['valide'];
+    //Archiver automatiquement à la connexion
+    $archivage = "UPDATE `sorties` SET `passer`=1 WHERE `dateSortie`< :dDay AND `passer` = 0";
+    $param = [['prep'=>':dDay', 'variable'=>date('Y-m-d')]];
+    $archive = new CurDB($archivage, $param);
+    $archive->actionDB();
+    //Fin archivage
     header('location:../index.php?message="Bienvenu '.$dataUser[0]['login'].'"');
   } else {
       header('location:../index.php?message="Login ou mot de passe incorrecte"');
