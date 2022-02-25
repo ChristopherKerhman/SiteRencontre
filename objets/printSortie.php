@@ -168,6 +168,8 @@ class PrintSortie extends GetSorties {
       <th>Créateur</th>
       <th>Type</th>
       <th>Date</th>
+      <th>Voir</th>
+      <th>Supprimer</th>
     </tr>';
     foreach ($data as $key => $value) {
       echo '<tr>
@@ -175,6 +177,8 @@ class PrintSortie extends GetSorties {
         <td>'.$value['login'].'</td>
         <td>'.$value['typeSortie'].'</td>
         <td>'.brassageDate($value['dateSortie']).'</td>
+        <td>A venir</td>
+        <td>A venir</td>
       </tr>';
     }
     echo '</table>';
