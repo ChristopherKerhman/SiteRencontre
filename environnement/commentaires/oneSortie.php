@@ -6,10 +6,7 @@ require 'objets/printCommentaire.php';
 $idSortie = filter($_GET['idSortie']);
 $oneSortie =  new PrintSortie();
 $dataTraiter = $oneSortie->oneSortie($idSortie);
-$oneSortie->affichageSortie($dataTraiter);
-$commentaires = new PrintCommentaires();
-//On sort les données lier aux commentaires de la sortie
-$dataCommentaires = $commentaires->commentaireSortie ($idSortie);
+$oneSortie->InscriptionSortie($dataTraiter);
  ?>
 <form class="formulaire" action="CUD/Create/commentaireSortie.php" method="post">
   <textarea name="commentaire" rows="8" cols="80" placeholder="Ajouter un commentaire ?"></textarea>
@@ -20,4 +17,10 @@ $dataCommentaires = $commentaires->commentaireSortie ($idSortie);
     <button type="reset" name="button">Effacer</button>
   </div>
 </form>
-<?php $commentaires->commentaires($dataCommentaires, $idNav); ?>
+<?php
+
+  //On sort les données lier aux commentaires de la sortie
+  $commentaires = new PrintCommentaires();
+  $dataCommentaires = $commentaires->commentaireSortie ($idSortie);
+  $commentaires->commentaires($dataCommentaires, $idNav);
+?>

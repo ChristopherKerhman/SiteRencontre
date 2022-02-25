@@ -7,7 +7,18 @@ require 'objets/printSortie.php';
 <form v-if="cle" class="colonne" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?idNav='.$idNav; ?>" method="post">
    <h3>Rechercher une sortie ?</h3>
 <label for="limit">Nombre maximal de sortie affiché ?</label>
-  <input type="number" name="limit" min="1" max="10" value="6">
+  <select id="limit" name="limit">
+    <?php
+    for ($i=1; $i <=8 ; $i++) {
+      if($i == 4) {
+        echo '<option value="'.$i.'" selected>'.$i.'</option>';
+      } else {
+        echo '<option value="'.$i.'">'.$i.'</option>';
+      }
+
+    }
+     ?>
+  </select>
 <label for="dateHeureSortie">Date de la sortie ?</label>
    <input type="date" name="dateSortie" min="<?php echo date('Y-m-d'); ?>" value="<?php echo date('Y-m-d'); ?>" required>
   <?php

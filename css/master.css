@@ -55,7 +55,7 @@ font-family: 'Luckiest Guy', cursive;
 }
 body {
   background-color: #1C343D;
-  color: #F4A261;
+    color: #D6BF74;
 }
 header nav {
   padding: 0.75em;
@@ -86,7 +86,7 @@ h1 {
   margin-left: 0.25em;
   margin-top: 0.25em;
   font-family: 'Luckiest Guy', cursive;
-  color: #FFB441;
+  color: #D6BF74;
   font-size: 3em;
   padding-bottom: 0.5em;
   letter-spacing: 3px;
@@ -95,7 +95,7 @@ h2 {
     margin-left: 0.25em;
     margin-top: 0.25em;
     font-family: 'Luckiest Guy', cursive;
-    color: #FFB441;
+    color: #D6BF74;
     font-size: 1.6em;
       margin-left: 1em;
     padding-bottom: 0.5em;
@@ -103,7 +103,7 @@ h2 {
 }
 h3 {
   font-family: 'Luckiest Guy', cursive;
-  color: #FFB441;
+  color: #D6BF74;
   font-size: 1.5em;
     margin-left: 1em;
   padding-bottom: 0.5em;
@@ -111,7 +111,7 @@ h3 {
 }
 h4 {
   font-family: 'Luckiest Guy', cursive;
-  color: #FFB441;
+  color: #D6BF74;
   font-size: 1.1em;
   padding-bottom: 0.5em;
   margin-left: 1em;
@@ -149,9 +149,13 @@ article {
 }
 .commentaires {
   font-size: 1.2em;
+  background: #264653;
   border: 1px solid #E9C46A;
   padding: 1em;
   margin-bottom: 0.25em;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*Presentation tableau*/
@@ -205,9 +209,9 @@ th {
   font-family: 'Luckiest Guy', cursive;
   text-transform: uppercase;
   text-decoration: none;
-  color: #E76F51;
+  color: #713426;
+  background-color: #DBB963;
   margin-right: 2em;
-  background-color: #E9C46A;
   border-radius: 4px;
   padding-top: 0.35em;
   padding-left: 0.25em;
@@ -256,9 +260,10 @@ th {
 }
 input, select {
   width: auto;
-  font-size: 1em;
+  background-color: #FFD6AD;
+  color: #000000;
+  font-size: 1.2em;
   font-style: italic;
-  color: grey;
   margin-left: 1em;
   margin-right: 1em;
 }
@@ -267,8 +272,8 @@ button {
   font-family: 'Luckiest Guy', cursive;
   font-size: 1.2em;
   text-transform: uppercase;
-  color: #E76F51;
-  background-color: #E9C46A;
+  color: #713426;
+  background-color: #DBB963;
   border-radius: 4px;
   padding-top: 0.35em;
   padding-left: 0.25em;
@@ -326,7 +331,7 @@ label {
 min-height: 500px;
 min-width: 500px;
 background: #264653;
-color: white;
+color: #FFD6AD;
 font-size: 1.5em;
  border-radius: 5px;
 display: flex;
