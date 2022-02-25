@@ -85,8 +85,6 @@ class PrintSortie extends GetSorties {
         $detection = new readDB($recherche, $param);
         $dataTraiter = $detection->read();
         if($dataCount[0]['nbr'] >= $value['nombreMax']) {
-              echo '<strong>Sortie complète</strong>';
-        } else {
           if ($dataTraiter == array()){
           echo '<form action="CUD/Create/inscriptionSortie.php" method="post">
             <input type="hidden" name="id_Sortie" value="'.$value['idSortie'].'" />
@@ -95,6 +93,8 @@ class PrintSortie extends GetSorties {
         } else {
           echo '<strong>Vous êtes déjà inscrit</strong>';
         }
+        } else {
+          echo 'Sortie complète';
         }
         echo'</li>';
         echo '<li><strong>Les personnes inscrites :</strong></li>';

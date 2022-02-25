@@ -25,7 +25,7 @@ require 'objets/printSortie.php';
   </select>
   <label for="codePostale">Numéro du département ?</label>
   <?php
-  $triCodeP = "SELECT `codePostal` FROM `sorties`
+  $triCodeP = "SELECT DISTINCT `codePostal` FROM `sorties`
   WHERE `partager` = 1 AND `valide` = 1 AND `dateSortie` >= :dateSortie";
   $param = [['prep'=>':dateSortie', 'variable'=>$dateDujour]];
   $triCP = new readDB($triCodeP, $param);

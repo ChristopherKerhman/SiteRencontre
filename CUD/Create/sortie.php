@@ -28,7 +28,19 @@ if (!empty(filter($_POST['prix']))) {
 //print_r($parametre);
 $insert = new CurDB($createSortie, $parametre);
 $action = $insert->actionDB();
-  header('location:../../index.php?message=Sortie '.filter($_POST['titreSortie']).' créée.');
+//Inscription automatique
+$rechercheLastId = "SELECT `idSortie` FROM `sorties` WHERE `id_User` = :idUser ORDER BY `idSortie` DESC LIMIT 1";
+$param = [['prep'=>':idUser', 'variable'=>$_SESSION['idUser']]];
+$lastIdSortie = new readDB($rechercheLastId, $param);
+$idSortie = $lastIdSortie->read();
+$id = $idSortie[0]['idSortie'];
+$record = "INSERT INTO `rencontres`(`id_Sortie`, `id_User`) VALUES (:id_Sortie, :idUser)";
+$param = [['prep'=>':idUser', 'variable'=>$_SESSION['idUser']],['prep'=>':id_Sortie', 'variable'=>$id]];
+$insert = new CurDB($record, $param);
+$action = $insert->actionDB();
+
+//Fin de l'inscription automatique
+ header('location:../../index.php?message=Sortie '.filter($_POST['titreSortie']).' créée.');
 }
 }
 } else {

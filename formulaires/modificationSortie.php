@@ -1,7 +1,8 @@
 <?php
-require 'objets/sorties.php';
+require 'objets/getSorties.php';
+require 'objets/printSortie.php';
 $idSortie = filter($_GET['idSortie']);
-$oneSortie = new Sorties();
+$oneSortie = new PrintSortie();
 $dataSortie = $oneSortie->oneSortie($idSortie);
  ?>
  <form class="formulaire" action="CUD/Update/sortie.php" method="post">
