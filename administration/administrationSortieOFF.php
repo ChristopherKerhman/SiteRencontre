@@ -1,6 +1,4 @@
-
 <article class="presentationTableau">
-
 <?php
 include 'securite/securiterCreateur.php';
 include 'functions/functionPagination.php';
