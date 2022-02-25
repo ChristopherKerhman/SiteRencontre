@@ -4,7 +4,7 @@ require 'objets/getSorties.php';
 require 'objets/printSortie.php';
  ?>
  <article class="ligne">
-<form class="colonne" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?idNav='.$idNav; ?>" method="post">
+<form v-if="cle" class="colonne" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?idNav='.$idNav; ?>" method="post">
    <h3>Rechercher une sortie ?</h3>
 <label for="limit">Nombre maximal de sortie affiché ?</label>
   <input type="number" name="limit" min="1" max="10" value="6">

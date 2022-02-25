@@ -20,4 +20,4 @@ $dataCommentaires = $commentaires->commentaireSortie ($idSortie);
     <button type="reset" name="button">Effacer</button>
   </div>
 </form>
-<?php $commentaires->commentaires($dataCommentaires); ?>
+<?php $commentaires->commentaires($dataCommentaires, $idNav); ?>

@@ -161,4 +161,22 @@ class PrintSortie extends GetSorties {
     }
   echo '</div>';
   }
+  public function tableauSorties($data) {
+    echo '<table>';
+    echo '<tr>
+      <th>Nom sortie</th>
+      <th>Créateur</th>
+      <th>Type</th>
+      <th>Date</th>
+    </tr>';
+    foreach ($data as $key => $value) {
+      echo '<tr>
+        <td>'.$value['titreSortie'].'</td>
+        <td>'.$value['login'].'</td>
+        <td>'.$value['typeSortie'].'</td>
+        <td>'.brassageDate($value['dateSortie']).'</td>
+      </tr>';
+    }
+    echo '</table>';
+  }
 }
