@@ -161,7 +161,7 @@ class PrintSortie extends GetSorties {
     }
   echo '</div>';
   }
-  public function tableauSorties($data) {
+  public function tableauSorties($data, $idNav) {
     echo '<table>';
     echo '<tr>
       <th>Nom sortie</th>
@@ -177,10 +177,83 @@ class PrintSortie extends GetSorties {
         <td>'.$value['login'].'</td>
         <td>'.$value['typeSortie'].'</td>
         <td>'.brassageDate($value['dateSortie']).'</td>
-        <td>A venir</td>
-        <td>A venir</td>
-      </tr>';
+        <td><a class="lienSite" href="index.php?idNav=34&idSortie='.$value['idSortie'].'">Voir</a></td>';
+        // Traitement conditionnelle des actions
+        if ($value['valide'] == 1) {
+          $message = 'Pas de suppression possible.';
+          if (($value['passer'] == 1)&&($value['valide'] == 1)) {
+            $message = '<form class="" action="CUD/Delette/adminSortie.php" method="post">
+              <input type="hidden" name="idSortie" value="'.$value['idSortie'].'">
+              <input type="hidden" name="idNav" value="'.$idNav.'">
+               <button type="submit" name="button">Supprimer</button>
+            </form>';
+          }
+        } else {
+            $message = '<form class="" action="CUD/Delette/adminSortie.php" method="post">
+              <input type="hidden" name="idSortie" value="'.$value['idSortie'].'">
+              <input type="hidden" name="idNav" value="'.$idNav.'">
+               <button type="submit" name="button">Supprimer</button>
+            </form>';
+          }
+        echo'<td>'.$message.'</td>
+        </tr>';
     }
     echo '</table>';
+  }
+  public function AdminSortie($data, $idSortie, $idNav) {
+    echo '<div class="gallery">';
+      foreach ($data as $key => $value) {
+        $count = "SELECT COUNT(`idRencontre`) AS `nbr` FROM `rencontres` WHERE `id_Sortie` = :idSortie";
+        $param = [['prep'=>':idSortie', 'variable'=>$value['idSortie']]];
+        $counter = new readDB($count, $param);
+        $dataCount = $counter->read();
+        echo '<div class="item">
+        <ul class="message">
+        <li><h4>'.$value['titreSortie'].'</h4></li>
+        <li><strong>Créer par : '.$value['login'].'</strong></li>
+        <li><strong>'.$value['typeSortie'].'</strong></li>
+        <li><p>
+        '.$value['texteSortie'].'
+        </p></li>
+        <strong><li>Personnes inscrite :'.$dataCount[0]['nbr'].'/'.$value['nombreMax'].'</li>
+        <li>Date '.brassageDate($value['dateSortie']).'</li>
+        <li>Heure du rendez-vous : '.heure($value['heureSortie']).'</li>
+        <li>Prix : '.$value['prix'].' €</li></strong>
+        <li>Adresse du rendez-vous : '.$value['lieu'].'</li>';
+        // Administration fine de la sortie :
+        if($value['valide'] >0) {
+          $message = 'Invalider';
+          $valide = $value['valide'];
+        } else {
+          $message = 'Valider';
+          $valide = $value['valide'];
+        }
+        echo '<li><strong>Les personnes inscrites :</strong></li>';
+        //Personnes inscrites à la sortie
+        $liste = "SELECT `login`
+        FROM `rencontres`
+        INNER JOIN `users` ON `idUser` = `id_User`
+        WHERE `id_Sortie` = :id_Sortie";
+        $param = [['prep'=>'id_Sortie', 'variable'=>$value['idSortie']]];
+        $inscrit = new readDB($liste, $param);
+        $dataTraiter = $inscrit->read();
+        foreach ($dataTraiter as $key => $value) {
+          echo '<li>'.$value['login'].'</li>';
+        }
+
+        echo '<li class="ligne">';
+        echo '<form class="formulaire" action="CUD/Update/AdminValideSortie.php" method="post">
+        <input type="hidden" name="valide" value="'.$valide.'" />
+        <input type="hidden" name="id_Sortie" value="'.$idSortie.'" />
+        <input type="hidden" name="idNav" value="'.$idNav.'" />
+        <button type="submit" name="button">'.$message.'</button>
+        </form>';
+
+        echo'</li>';
+        echo'</ul>';
+        echo'</div>';
+      }
+
+    echo '</div>';
   }
 }

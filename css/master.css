@@ -191,6 +191,9 @@ table {
   margin: 0.5em;
   font-size: 1.2em;
 }
+tr {
+  height: 2em;
+}
 td {
   padding-left: 0.5em;
   padding-right: 0.5em;
