@@ -47,7 +47,7 @@ $pages = parametrePagination ($parPage, $requetteSQL, $param );
 // Calcul du premier article dans la page.
 $premier = ($currentPage * $parPage) - $parPage;
 // Traitement des données a affiché.
-$requetteSQL = 'SELECT `idSortie`, `login`, `titreSortie`, `typeSortie`, `dateSortie`, `sorties`.`valide`, `passer`
+$requetteSQL = 'SELECT `idSortie`, `login`, `titreSortie`, `typeSortie`, `dateSortie`, `sorties`.`valide`, `passer`, `users`.`valide` AS `UV`
 FROM `sorties`
 INNER JOIN `users` ON `idUser` = `id_User`
 INNER JOIN `types` ON `idTypeSortie` = `type`

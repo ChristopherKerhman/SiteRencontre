@@ -173,10 +173,12 @@ class PrintSortie extends GetSorties {
   echo '</div>';
   }
   public function tableauSorties($data, $idNav) {
+    $yes = ['Non', 'Oui'];
     echo '<table>';
     echo '<tr>
       <th>Nom sortie</th>
       <th>Créateur</th>
+      <th>Compte valide ?</th>
       <th>Type</th>
       <th>Date</th>
       <th>Voir</th>
@@ -186,13 +188,14 @@ class PrintSortie extends GetSorties {
       echo '<tr>
         <td>'.$value['titreSortie'].'</td>
         <td>'.$value['login'].'</td>
+        <td>'.$yes[$value['UV']].'</td>
         <td>'.$value['typeSortie'].'</td>
         <td>'.brassageDate($value['dateSortie']).'</td>
         <td><a class="lienSite" href="index.php?idNav=34&idSortie='.$value['idSortie'].'">Voir</a></td>';
         // Traitement conditionnelle des actions
         if ($value['valide'] == 1) {
           $message = 'Pas de suppression possible.';
-          if (($value['passer'] == 1)&&($value['valide'] == 1)) {
+          if (($value['passer'] == 1)&&($value['sortie.valide'] == 1)) {
             $message = '<form class="" action="CUD/Delette/adminSortie.php" method="post">
               <input type="hidden" name="idSortie" value="'.$value['idSortie'].'">
               <input type="hidden" name="idNav" value="'.$idNav.'">
