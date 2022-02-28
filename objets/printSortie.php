@@ -210,6 +210,7 @@ class PrintSortie extends GetSorties {
         echo '<div class="item">
         <ul class="message">
         <li><h4>'.$value['titreSortie'].'</h4></li>
+        <li>Sortie valide ? '.$this->yes[$value['valide']].'</li>
         <li><strong>Créer par : '.$value['login'].'</strong></li>
         <li><strong>'.$value['typeSortie'].'</strong></li>
         <li><p>

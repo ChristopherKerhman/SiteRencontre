@@ -4,6 +4,7 @@ class GetSorties {
   public function __construct(){
     $this->date = date('Y-m-d');
     $this->idUser = $_SESSION['idUser'];
+    $this->yes = ['Non', 'Oui'];
   }
   public function lastSortie($limit, $valide) {
     $selectSortie = "SELECT `idSortie`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,

@@ -37,19 +37,21 @@ include '../fonctionsDB.php';
           ['prep'=> ':valide', 'variable' => $valide],
           ['prep'=> ':role', 'variable' => $role]];
       } else {
+        $valide = filter($_POST['valide']);
         $requetteSQL = "UPDATE `users`
-        SET `nom`= :nom,`prenom`= :prenom,`login`= :login
+        SET `nom`= :nom,`prenom`= :prenom,`login`= :login, `valide`=:valide
         WHERE `idUser`= :idUser";
         $parametreUser = [
           ['prep'=> ':idUser', 'variable' => $idUser],
           ['prep'=> ':nom', 'variable' => $nom],
           ['prep'=> ':prenom', 'variable' => $prenom],
-          ['prep'=> ':login', 'variable' => $login]];
+          ['prep'=> ':login', 'variable' => $login],
+          ['prep'=> ':valide', 'variable' => $valide]];
       }
       $updateUser = new CurDB($requetteSQL, $parametreUser);
       $updateUser->actionDB();
       header('location:../../index.php?message=Fiche de '.$login.' modifiée.');
-    }  
+    }
     }
      else {
     header('location:../../index.php?message=Erreur de modification de la fiche.');

@@ -16,5 +16,5 @@ $oneSortie->AdminSortie($dataTraiter, $idSortie, $idNav);
 <?php
   $commentaires = new PrintCommentaires();
   $dataCommentaires = $commentaires->commentaireSortie ($idSortie);
-  $commentaires->commentaires($dataCommentaires, $idNav);
+  $commentaires->commentairesAdmin($dataCommentaires, $idNav);
 ?>

@@ -18,7 +18,7 @@ class FicheUser {
     $this->yes = $yes = ['Non', 'Oui'];
   }
   public function fiche() {
-    echo '<ul>
+    echo '<ul id="ficheProfil">
     <li>Nom : '.$this->nom.'</li>
     <li>Prenom : '.$this->prenom.'</li>
     <li>Login : '.$this->login.'</li>
@@ -27,7 +27,7 @@ class FicheUser {
     </ul>';
   }
   public function administrationFiche () {
-    echo '<form action="CUD/Update/ficheUser.php" method="post">
+    echo '<form class="formulaires" action="CUD/Update/ficheUser.php" method="post">
             <label for="nom">Nom</label>
             <input id="nom" type="text" name="nom" value="'.$this->nom.'">
             <label for="prenom">Prenom</label>
@@ -54,7 +54,7 @@ class FicheUser {
         </form>';
   }
   public function modUserFiche () {
-    echo '<form action="CUD/Update/ficheUser.php" method="post">
+    echo '<form class="formulaire" action="CUD/Update/ficheUser.php" method="post">
             <label for="nom">Nom</label>
             <input id="nom" type="text" name="nom" value="'.$this->nom.'">
             <label for="prenom">Prenom</label>
@@ -62,6 +62,11 @@ class FicheUser {
             <label for="login">Login</label>
             <input id="login"  type="text" name="login" value="'.$this->login.'">
             <input type="hidden" name="idUser" value="'.$this->idUser.'" />
+            <label for="valide">Supprimer mon compte ?</label>
+            <select id="valide" name="valide">
+            <option value="0">Oui</option>
+            <option value="1" selected>Non</option>
+            </select>
             <button  type="submit" name="button">Modifier fiche</button>
       </form>';
   }

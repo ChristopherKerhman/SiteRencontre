@@ -300,7 +300,20 @@ label {
   margin-bottom: 0.5em;
 }
 /*Fin Formulaire*/
+/*Presentation*/
+#ficheProfil li {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
 /*==Flex==*/
+.flexCenter {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
 .flexLigne {
   display: flex;
   flex-direction: row;

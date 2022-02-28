@@ -1,7 +1,7 @@
 <?php
 class GetCommentaires {
   public function commentaireSortie ($idSortie) {
-    $triCommentaire = "SELECT `idCommentaire`, `id_Sortie`, `id_User`, `dateCommentaire`, `commentaires`.`valide`, `commentaire`, `login`
+    $triCommentaire = "SELECT `idCommentaire`, `id_Sortie`, `id_User`, `dateCommentaire`, `commentaires`.`valide`, `commentaire`, `login`, verrou
     FROM `commentaires`
     INNER JOIN `users` ON `id_User` = `idUser`
     WHERE `id_Sortie` = :idSortie AND `commentaires`.`valide` = 1

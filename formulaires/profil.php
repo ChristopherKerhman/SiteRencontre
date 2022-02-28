@@ -8,5 +8,9 @@ $readFicheUser = new readDB($requetteSQL, $parametreUser);
 $dataUser = $readFicheUser->read();
 require 'objets/ficheUser.php';
 $affichage = new ficheUser ($dataUser);
-$affichage->fiche();
-$affichage->modUserFiche();
+?>
+<div class="flexCenter">
+<?php $affichage->fiche(); ?>
+
+<?php $affichage->modUserFiche(); ?>
+</div>
