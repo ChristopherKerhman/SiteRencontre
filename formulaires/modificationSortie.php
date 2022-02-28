@@ -1,6 +1,7 @@
 <?php
 require 'objets/getSorties.php';
 require 'objets/printSortie.php';
+include 'securite/zonePrive.php';
 $idSortie = filter($_GET['idSortie']);
 $oneSortie = new PrintSortie();
 $dataSortie = $oneSortie->oneSortie($idSortie);

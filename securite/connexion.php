@@ -8,6 +8,7 @@ require $cheminObjet.'paramDB.php';
 require $cheminObjet.'readDB.php';
 require $cheminObjet.'cud.php';
 include $cheminCUD.'fonctionsDB.php';
+
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $login = filter($_POST['login']);
   $moria = $_POST['motDePasse'];

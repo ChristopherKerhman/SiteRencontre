@@ -1,4 +1,4 @@
-
+<?php include 'securite/zonePrive.php'; ?>
 <form class="formulaire" action="CUD/Create/sortie.php" method="post">
   <h3>Créer une nouvelle sortie <?=$_SESSION['login']; ?> ?</h3>
   <label for="titreSortie">Titre de votre sortie</label>

@@ -1,3 +1,4 @@
+<?php include 'securite/securiterCreateur.php'; ?>
 <h4>Ajouter un type de sortie</h4>
 <form class="formulaire" action="CUD/Create/typeSortie.php" method="post">
   <label for="typeSortie">Ajouter un grand type de sortie :</label>

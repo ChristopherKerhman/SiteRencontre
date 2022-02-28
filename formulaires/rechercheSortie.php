@@ -1,4 +1,5 @@
 <?php
+include 'securite/zonePrive.php';
 $dateDujour = date('y-m-d');
 require 'objets/getSorties.php';
 require 'objets/printSortie.php';
