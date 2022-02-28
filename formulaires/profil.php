@@ -12,9 +12,10 @@ require 'objets/preparationRequette.php';
 $affichage = new ficheUser ($dataUser);
 ?>
 <div class="flexCenter">
-<?php $affichage->fiche(); ?>
-
-<?php $affichage->modUserFiche(); ?>
+<?php $affichage->fiche();
+$affichage->modUserFiche();
+$affichage->listeBloc();
+ ?>
 </div>
 
 <form class="formulaire" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?idNav='.$idNav; ?>" method="post">

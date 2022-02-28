@@ -1,4 +1,5 @@
 <?php
+require 'cud.php';
 class FicheUser {
   private $idUser;
   private $nom;
@@ -18,13 +19,26 @@ class FicheUser {
     $this->yes = $yes = ['Non', 'Oui'];
   }
   public function fiche() {
+    $compte = "SELECT COUNT(`idRestriction`) AS `nbr` FROM `exclusion` WHERE `id_Bloc` = :idUser";
+    $param = [['prep'=>':idUser', 'variable'=>  $this->idUser]];
+    $aligement = new readDB($compte, $param);
+    $comportements = $aligement->read();
+    $launch = $comportements[0]['nbr'];
     echo '<ul id="ficheProfil">
+    <li><strong>Fiche de profil</strong></li>
     <li>Nom : '.$this->nom.'</li>
     <li>Prenom : '.$this->prenom.'</li>
     <li>Login : '.$this->login.'</li>
     <li>valide : '.$this->yes[$this->valide].'</li>
     <li>Role : '.$this->roles[$this->role].'</li>
+    <li>Personne qui vous ont bloqué : '.$launch.'/10</li>
     </ul>';
+    if($launch > 3) {
+      $requetteSQL = "UPDATE `users` SET `valide`=0 WHERE `idUser`= :idUser";
+      $parametreUser = [['prep'=> ':idUser', 'variable' => $this->idUser]];
+      $updateUser = new CurDB($requetteSQL, $parametreUser);
+      $updateUser->actionDB();
+    }
   }
   public function administrationFiche () {
     echo '<form class="formulaires" action="CUD/Update/ficheUser.php" method="post">
@@ -69,6 +83,20 @@ class FicheUser {
             </select>
             <button  type="submit" name="button">Modifier fiche</button>
       </form>';
+  }
+  public function listeBloc () {
+    $param = [['prep'=>':idUser', 'variable'=>  $this->idUser]];
+    $sql = "SELECT `idRestriction`,`login`
+    FROM `exclusion`
+    INNER JOIN `users` ON `idUser` = `id_Bloc`
+    WHERE `id_User` = :idUser";
+    $liste = new readDB($sql, $param);
+    $dataTraiter = $liste->read();
+    echo '<ul id="ficheProfil"><li><strong>Personne bloqué</strong></li>';
+    foreach ($dataTraiter as $key => $value) {
+      echo '<li>'.$value['login'].'</li>';
+    }
+    echo'</ul>';
   }
 }
 ?>

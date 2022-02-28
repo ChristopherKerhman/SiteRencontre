@@ -34,7 +34,7 @@ class GetSorties {
     return $dataSortie;
   }
   public function triSortie($limit, $type, $pass,$gratuit,$adult, $codePostale, $date) {
-    $selectSortie = "SELECT `idSortie`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
+    $selectSortie = "SELECT `idSortie`, `id_User`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
     `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`
     FROM `sorties`
     INNER JOIN `users` ON `idUser` = `id_User`

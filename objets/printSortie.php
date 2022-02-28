@@ -59,8 +59,15 @@ class PrintSortie extends GetSorties {
     echo '</div>';
   }
   public function InscriptionSortie($data) {
-    echo '<div class="gallery">';
+
       foreach ($data as $key => $value) {
+      // Recherche si l'utilisateur bloque la personne qui recherche.
+      $searchBloc = "SELECT `id_Bloc` FROM `exclusion` WHERE `id_User` = :id_User";
+      $parametre = [['prep'=>':id_User', 'variable'=>$value['id_User']]];
+      $controle = new readDB($searchBloc, $parametre);
+      $dataTraiter = $controle->read();
+      if ($dataTraiter == array()) {
+        echo '<div class="gallery">';
         $count = "SELECT COUNT(`idRencontre`) AS `nbr` FROM `rencontres` WHERE `id_Sortie` = :idSortie";
         $param = [['prep'=>':idSortie', 'variable'=>$value['idSortie']]];
         $counter = new readDB($count, $param);
@@ -111,8 +118,12 @@ class PrintSortie extends GetSorties {
         }
         echo'</ul>';
         echo'</div>';
+          echo '</div>';
       }
-    echo '</div>';
+
+      }
+    // fin Recherche si l'utilisateur bloque la personne qui recherche.
+
   }
   public function deinscriptionSortie($data, $idNav) {
         echo '<div class="gallery">';

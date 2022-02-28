@@ -82,7 +82,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $affichageSorties = new PrintSortie();
   $dataSortie = $affichageSorties->triSortie($limit, $type, $pass,$gratuit,$adult, $codePostale, $date);
   if($dataSortie == array()){
-    $triType = "SELECT `idTypeSortie`, `typeSortie` FROM `types` WHERE `idTypeSortie` = :idTypeSortie";
+    $triType = "SELECT `idTypeSortie`, `typeSortie`
+    FROM `types`
+    WHERE `idTypeSortie` = :idTypeSortie";
     $param = [['prep'=>':idTypeSortie', 'variable'=>$type]];
     $triTypesSorties = new readDB($triType, $param);
     $dataTypesSortie = $triTypesSorties->read();
