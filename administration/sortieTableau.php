@@ -38,10 +38,10 @@ $titre = ['<h3>Les sorties en ligne : page'.$currentPage .'</h3>',
   }
 }
 $parPage = 10;
-// Déclaration de paramètre vide :
+// Déclaration de paramètre :
 
 $param = [['prep'=>':valide', 'variable'=>$valide],['prep'=>':passer', 'variable'=>$passer]];
-// Recherche du nombre d'armes total
+// Recherche du nombre de sorties
 $requetteSQL = "SELECT COUNT(`idSortie`) AS `nbr` FROM `sorties` WHERE `valide` = :valide AND `passer` = :passer";
 $pages = parametrePagination ($parPage, $requetteSQL, $param );
 // Calcul du premier article dans la page.

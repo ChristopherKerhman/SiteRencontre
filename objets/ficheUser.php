@@ -41,7 +41,7 @@ class FicheUser {
     }
   }
   public function administrationFiche () {
-    echo '<form class="formulaires" action="CUD/Update/ficheUser.php" method="post">
+    echo '<form class="formulaire" action="CUD/Update/ficheUser.php" method="post">
             <label for="nom">Nom</label>
             <input id="nom" type="text" name="nom" value="'.$this->nom.'">
             <label for="prenom">Prenom</label>
@@ -49,23 +49,34 @@ class FicheUser {
             <label for="login">Login</label>
             <input id="login" type="text" name="login" value="'.$this->login.'">
             <label for="valide">Compte valide ?</label>
-            <select di="valide" name="valide">
-              <option value="0">Non</option>
-              <option value="1" selected>Oui</option>
-            </select>
+            <select di="valide" name="valide">';
+              for ($i=0; $i < count($this->yes) ; $i++) {
+                if($i == $this->valide) {
+                  echo '<option value="'.$i.'" selected>'.$this->yes[$i].'</option>';
+                } else {
+                echo '<option value="'.$i.'">'.$this->yes[$i].'</option>';
+                }
+              }
+
+            echo '</select>
             <label for="role">Role ?</label>
-            <select name="role">
-                <option value="1">Utilisateur</option>
-                <option value="2">Gestionnaire</option>
-                <option value="3">Administrateur</option>
-            </select>
+            <select name="role">';
+              for ($i=0; $i <count($this->roles) ; $i++) {
+                if($i == $this->role) {
+                  echo '<option value="'.$i.'" selected>'.$this->roles[$i].'</option>';
+                } else {
+                echo '<option value="'.$i.'">'.$this->roles[$i].'</option>';
+                }
+              }
+            echo'</select>
           <input type="hidden" name="idUser" value="'.$this->idUser.'" />
           <button type="submit" name="button">Modifier fiche</button>
-      </form>
-      <form action="CUD/Delette/user.php" method="post">
-            <input type="hidden" name="idUser" value="'.$this->idUser.'" />
-            <button type="submit" name="button">Effacer</button>
-        </form>';
+          <form action="CUD/Delette/user.php" method="post">
+                <input type="hidden" name="idUser" value="'.$this->idUser.'" />
+                <button type="submit" name="button">Effacer</button>
+            </form>  </form>';
+
+
   }
   public function modUserFiche () {
     echo '<form class="formulaire" action="CUD/Update/ficheUser.php" method="post">
