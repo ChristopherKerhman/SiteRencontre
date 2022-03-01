@@ -34,10 +34,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   echo '<ul class="formulaire">';
   foreach ($dataTraiter as $key => $value) {
     echo '<li class="flexLigne">'.$value['login'].'&emsp;
-    <form action="CUD/Create/blocIdUser.php" method="post">
+      <form action="CUD/Create/blocIdUser.php" method="post">
       <input type="hidden" name="id_Bloc" value="'.$value['idUser'].'">
+      <input type="hidden" name="idNav" value="'.$idNav.'">
+      <button type="submit" name="button" value="1">Bloqué</button></form>
+      &emsp;
+          <form action="CUD/Create/blocIdUser.php" method="post">
+          <input type="hidden" name="id_Bloc" value="'.$value['idUser'].'">
           <input type="hidden" name="idNav" value="'.$idNav.'">
-        <button type="submit" name="button">Bloqué</button></form></li>';
+          <button type="submit" name="button" value="0">Débloqué</button></form>
+        </li>';
   }
   echo '</ul>';
 } else {

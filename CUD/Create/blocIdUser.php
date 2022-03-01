@@ -2,6 +2,8 @@
 session_start();
 include '../enteteCUD.php';
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+if(filter($_POST['button'] == 1)){
 $idNav = filter($_POST['idNav']);
 $_POST = doublePOP($_POST);
 $preparation = new Preparation();
@@ -19,6 +21,16 @@ if ($test > 0) {
   $insert = new CurDB($update, $parametre);
   $action = $insert->actionDB();
   header('location:../../index.php?message=Personne bloqué.&idNav='.$idNav.'&idSortie='.$idSortie);
+}
+} else {
+  $idNav = filter($_POST['idNav']);
+  $_POST = doublePOP($_POST);
+  $preparation = new Preparation();
+  $parametre = $preparation->creationPrepIdUser($_POST);
+  $update = "DELETE FROM `exclusion` WHERE `id_User` = :idUser AND `id_Bloc` = :id_Bloc";
+  $insert = new CurDB($update, $parametre);
+  $action = $insert->actionDB();
+  header('location:../../index.php?message=Personne débloqué.&idNav='.$idNav.'&idSortie='.$idSortie);
 }
 
 } else {

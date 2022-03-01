@@ -93,6 +93,9 @@ class FicheUser {
     $liste = new readDB($sql, $param);
     $dataTraiter = $liste->read();
     echo '<ul id="ficheProfil"><li><strong>Personne bloqué</strong></li>';
+    if($dataTraiter == array()) {
+      echo '<li>Pas encore de personnes bloqués</li>';
+    }
     foreach ($dataTraiter as $key => $value) {
       echo '<li>'.$value['login'].'</li>';
     }
