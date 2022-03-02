@@ -59,6 +59,26 @@ class GetSorties {
     $dataSortie = $listeSortie->read();
     return $dataSortie;
   }
+  public function triSortieSimple($limit, $codePostale, $date) {
+    $selectSortie = "SELECT `idSortie`, `id_User`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
+    `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`
+    FROM `sorties`
+    INNER JOIN `users` ON `idUser` = `id_User`
+    INNER JOIN `types` ON `type` = `idTypeSortie`
+    WHERE `sorties`.`valide` = 1
+    AND `partager` = 1
+    AND `codePostal` = :codePostale
+    AND `dateSortie` >= :dateSortie
+    ORDER BY `dateSortie`
+    LIMIT {$limit}";
+    $param=[['prep'=>':codePostale', 'variable'=>$codePostale],
+            ['prep'=>':dateSortie', 'variable'=>$date]];
+    $listeSortie = new readDB($selectSortie, $param);
+    $dataSortie = $listeSortie->read();
+    return $dataSortie;
+  }
+
+
   public function getMysortie() {
     $tri = "SELECT `idRencontre`, `idSortie`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
     `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`, `login`
@@ -73,7 +93,7 @@ class GetSorties {
     return $dataSortie;
   }
   public function oneSortie($idSortie) {
-    $selectSortie = "SELECT `idSortie`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
+    $selectSortie = "SELECT `idSortie`, `login`, `id_User`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
     `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`, `type`
     FROM `sorties`
     INNER JOIN `users` ON `idUser` = `id_User`
