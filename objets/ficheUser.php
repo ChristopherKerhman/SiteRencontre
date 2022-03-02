@@ -19,11 +19,7 @@ class FicheUser {
     $this->yes = $yes = ['Non', 'Oui'];
   }
   public function fiche() {
-    $compte = "SELECT COUNT(`idRestriction`) AS `nbr` FROM `exclusion` WHERE `id_Bloc` = :idUser";
-    $param = [['prep'=>':idUser', 'variable'=>  $this->idUser]];
-    $aligement = new readDB($compte, $param);
-    $comportements = $aligement->read();
-    $launch = $comportements[0]['nbr'];
+
     echo '<ul id="ficheProfil">
     <li><strong>Fiche de profil</strong></li>
     <li>Nom : '.$this->nom.'</li>
@@ -31,52 +27,61 @@ class FicheUser {
     <li>Login : '.$this->login.'</li>
     <li>valide : '.$this->yes[$this->valide].'</li>
     <li>Role : '.$this->roles[$this->role].'</li>
-    <li>Personne qui vous ont bloqué : '.$launch.'/10</li>
+
     </ul>';
-    if($launch > 3) {
-      $requetteSQL = "UPDATE `users` SET `valide`=0 WHERE `idUser`= :idUser";
-      $parametreUser = [['prep'=> ':idUser', 'variable' => $this->idUser]];
-      $updateUser = new CurDB($requetteSQL, $parametreUser);
-      $updateUser->actionDB();
-    }
   }
   public function administrationFiche () {
-    echo '<form class="formulaire" action="CUD/Update/ficheUser.php" method="post">
-            <label for="nom">Nom</label>
-            <input id="nom" type="text" name="nom" value="'.$this->nom.'">
-            <label for="prenom">Prenom</label>
-            <input id="prenom" type="text" name="prenom" value="'.$this->prenom.'">
-            <label for="login">Login</label>
-            <input id="login" type="text" name="login" value="'.$this->login.'">
-            <label for="valide">Compte valide ?</label>
-            <select di="valide" name="valide">';
-              for ($i=0; $i < count($this->yes) ; $i++) {
-                if($i == $this->valide) {
-                  echo '<option value="'.$i.'" selected>'.$this->yes[$i].'</option>';
-                } else {
-                echo '<option value="'.$i.'">'.$this->yes[$i].'</option>';
-                }
+
+if($this->valide == 0) {
+  echo '<form class="formulaire" action="CUD/Update/ficheUser.php" method="post">
+          <label for="nom">Nom</label>
+          <input id="nom" type="text" name="nom" value="'.$this->nom.'">
+          <label for="prenom">Prenom</label>
+          <input id="prenom" type="text" name="prenom" value="'.$this->prenom.'">
+          <label for="login">Login</label>
+          <input id="login" type="text" name="login" value="'.$this->login.'">
+          <label for="valide">Compte valide ?</label>
+          <select di="valide" name="valide">';
+            for ($i=0; $i < count($this->yes) ; $i++) {
+              if($i == $this->valide) {
+                echo '<option value="'.$i.'" selected>'.$this->yes[$i].'</option>';
+              } else {
+              echo '<option value="'.$i.'">'.$this->yes[$i].'</option>';
               }
+            }
 
-            echo '</select>
-            <label for="role">Role ?</label>
-            <select name="role">';
-              for ($i=0; $i <count($this->roles) ; $i++) {
-                if($i == $this->role) {
-                  echo '<option value="'.$i.'" selected>'.$this->roles[$i].'</option>';
-                } else {
-                echo '<option value="'.$i.'">'.$this->roles[$i].'</option>';
-                }
+          echo '</select>
+          <label for="role">Role ?</label>
+          <select name="role">';
+            for ($i=0; $i <count($this->roles) ; $i++) {
+              if($i == $this->role) {
+                echo '<option value="'.$i.'" selected>'.$this->roles[$i].'</option>';
+              } else {
+              echo '<option value="'.$i.'">'.$this->roles[$i].'</option>';
               }
-            echo'</select>
-          <input type="hidden" name="idUser" value="'.$this->idUser.'" />
-          <button type="submit" name="button">Modifier fiche</button>
-          <form action="CUD/Delette/user.php" method="post">
-                <input type="hidden" name="idUser" value="'.$this->idUser.'" />
-                <button type="submit" name="button">Effacer</button>
-            </form>  </form>';
-
-
+            }
+          echo'</select>
+        <input type="hidden" name="idUser" value="'.$this->idUser.'" />
+        <button type="submit" name="button">Modifier fiche</button>
+        <form action="CUD/Delette/user.php" method="post">
+              <input type="hidden" name="idUser" value="'.$this->idUser.'" />
+              <button type="submit" name="button">Effacer</button>
+          </form>  </form>';
+} else {
+  $compte = "SELECT COUNT(`idRestriction`) AS `nbr` FROM `exclusion` WHERE `id_Bloc` = :idUser";
+  $param = [['prep'=>':idUser', 'variable'=>  $this->idUser]];
+  $aligement = new readDB($compte, $param);
+  $comportements = $aligement->read();
+  $launch = $comportements[0]['nbr'];
+  echo '<ul>
+  <li>login : '.$this->login.'</li>
+  <li>Nom : '.$this->nom.'</li>
+  <li>prenom : '.$this->prenom.'</li>
+  <li>Compte valide : Oui</li>
+  <li>Rôle : '.$this->roles[$this->role].'</li>
+  <li>Nombre de personne qui ont bloqué '.$this->login.' : '.$launch.'/10</li>
+  </ul>';
+}
   }
   public function modUserFiche () {
     echo '<form class="formulaire" action="CUD/Update/ficheUser.php" method="post">

@@ -1,4 +1,3 @@
-
 <?php
 include 'administration/securite.php';
 include 'functions/functionPagination.php';
@@ -38,6 +37,7 @@ $dataTraiter = affichageData($requetteSQL, $param);
     <th>Rôle</th>
     <th>Email</th>
     <th>Genre</th>
+    <th>Blocage</th>
     <th>Voir fiche</th>
   </tr>
 
@@ -46,6 +46,11 @@ $dataTraiter = affichageData($requetteSQL, $param);
   $role = ['Non valide', 'utilisateur', 'Moderateur', 'administrateur'];
   $genre = ['Féminin', 'Masculin', 'Non genré'];
   foreach ($dataTraiter as $key => $value) {
+   $block = "SELECT COUNT(`idRestriction`) AS `nbr` FROM `exclusion` WHERE `id_Bloc` = :idUser";
+    $param = [['prep'=>':idUser', 'variable'=> $value['idUser']]];
+    $aligement = new readDB($block, $param);
+    $comportements = $aligement->read();
+    $launch = $comportements[0]['nbr'];
     echo '<tr>';
     echo'<td>'.$value['login'].'</td>';
     echo'<td>'.$value['prenom'].'</td>';
@@ -54,6 +59,7 @@ $dataTraiter = affichageData($requetteSQL, $param);
     echo'<td>'.$role[$value['role']].'</td>';
     echo'<td>'.$value['email'].'</td>';
     echo'<td>'.$genre[$value['genre']].'</td>';
+    echo'<td>'.$launch.'/10</td>';
     echo'<td><a class="lienSite" href="index.php?idNav=35&idUser='.$value['idUser'].'">Fiche</a></td>';
     echo'</tr>';
   }
