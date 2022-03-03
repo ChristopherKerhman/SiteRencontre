@@ -196,7 +196,7 @@ class PrintSortie extends GetSorties {
         // Traitement conditionnelle des actions
         if ($value['valide'] == 1) {
           $message = 'Pas de suppression possible.';
-          if (($value['passer'] == 1)&&($value['sortie.valide'] == 1)) {
+          if (($value['passer'] == 1)&&($value['valide'] == 1)) {
             $message = '<form class="" action="CUD/Delette/adminSortie.php" method="post">
               <input type="hidden" name="idSortie" value="'.$value['idSortie'].'">
               <input type="hidden" name="idNav" value="'.$idNav.'">

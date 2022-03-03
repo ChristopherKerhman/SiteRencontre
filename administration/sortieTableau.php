@@ -6,10 +6,10 @@ require 'objets/getSorties.php';
 require 'objets/printSortie.php';
 
 if(isset($_GET['page']) && (!empty($_GET['page']))) {
+    $currentPage = filter($_GET['page']);
   $titre = ['<h3>Les sorties en ligne : page'.$currentPage .'</h3>',
   '<h3>Les sorties qui ont été annulées par leur créateur : page'.$currentPage .'</h3>',
   '<h3>Les sorties passées et archivées : page'.$currentPage .'</h3>'];
-  $currentPage = filter($_GET['page']);
   // Train de condition :
   if(($valide == 1) && ($passer ==1)) {
       echo $titre[2];
