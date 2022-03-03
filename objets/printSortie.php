@@ -1,6 +1,6 @@
 <?php
 class PrintSortie extends GetSorties {
-  public function affichageSortie($data) {
+  public function affichageSortie($data, $connect) {
     echo '<div class="gallery">';
       foreach ($data as $key => $value) {
         $count = "SELECT COUNT(`idRencontre`) AS `nbr` FROM `rencontres` WHERE `id_Sortie` = :idSortie";
@@ -12,6 +12,7 @@ class PrintSortie extends GetSorties {
         <li><h4>'.$value['titreSortie'].'</h4></li>
         <li><strong>Créer par : '.$value['login'].'</strong></li>
         <li><strong>'.$value['typeSortie'].'</strong></li>
+        <li><strong>Département :'.$value['codePostal'].'</strong></li>
         <li><p>
         '.$value['texteSortie'].'
         </p></li>
@@ -19,9 +20,31 @@ class PrintSortie extends GetSorties {
         <li>Date '.brassageDate($value['dateSortie']).'</li>
         <li>Heure du rendez-vous : '.heure($value['heureSortie']).'</li>
         <li>Prix : '.$value['prix'].' €</li></strong>
-        <li>Adresse du rendez-vous : '.$value['lieu'].'</li>
-        </ul>
-        </div>';
+        <li>Adresse du rendez-vous : '.$value['lieu'].'</li>';
+
+        if($connect != 0){
+        // utilisateur déjà enregistré ?
+        echo '<li>';
+        $recherche = "SELECT `id_User` FROM `rencontres` WHERE `id_Sortie` = :idSortie AND `id_User` = :idUser";
+        $param = [['prep'=>':idSortie', 'variable'=>$value['idSortie']], ['prep'=>':idUser', 'variable'=>$this->idUser]];
+        $detection = new readDB($recherche, $param);
+        $dataTraiter = $detection->read();
+        if($dataCount[0]['nbr'] >= $value['nombreMax']) {
+              echo '<strong>Sortie complète</strong>';
+        } else {
+          if ($dataTraiter == array()){
+          echo '<form action="CUD/Create/inscriptionSortie.php" method="post">
+            <input type="hidden" name="id_Sortie" value="'.$value['idSortie'].'" />
+            <button type="submit" name="button">S\'inscrire</button>
+          </form>';
+        } else {
+          echo '<strong>Vous êtes déjà inscrit</strong>';
+        }
+        }
+        echo'</li>';}
+
+        echo'</ul>
+      </div>';
       }
     echo '</div>';
   }

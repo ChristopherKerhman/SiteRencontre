@@ -52,6 +52,7 @@ FROM `sorties`
 INNER JOIN `users` ON `idUser` = `id_User`
 INNER JOIN `types` ON `idTypeSortie` = `type`
 WHERE `sorties`.`valide`= :valide AND `passer` = :passer
+ORDER BY `dateSortie` ASC
 LIMIT '.$premier.', '.$parPage.'';
 $dataTraiter = affichageData($requetteSQL, $param);
 // Print des sorties

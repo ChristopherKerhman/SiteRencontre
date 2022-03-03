@@ -22,10 +22,10 @@
 </div>
 <div>
 <label for="nombreMax">Nombre de personne maximum ?</label>
-<input id="nombreMax" type="number" name="nombreMax" min="3" max="120"> personnes</div>
+<input id="nombreMax" type="number" name="nombreMax" min="3" max="120" value="3"> personnes</div>
   <h4>Date et heure </h4>
 <label for="dateHeureSortie">Date de la sortie ?</label>
-<input type="date" name="dateSortie" min="<?php echo date('Y-m-d'); ?>" required>
+<input type="date" name="dateSortie" min="<?php echo date('Y-m-d'); ?>" value="<?php echo date('Y-m-d'); ?>" required>
 <label for="heureSortie">Heure du rendez-vous ?</label>
 <input id="heureSortie" type="time" name="heureSortie" required>
 </div>

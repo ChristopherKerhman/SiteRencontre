@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lien = array_intersect($listeInscrit, $listeBloquer);
     //Fin
     if($lien == array()) {
-      $createInscription = "INSERT INTO `rencontres`(`id_Sortie`, `id_User`) VALUES (:id_Sortie, :idUser)";
+     $createInscription = "INSERT INTO `rencontres`(`id_Sortie`, `id_User`) VALUES (:id_Sortie, :idUser)";
       $insert = new CurDB($createInscription, $parametre);
       $action = $insert->actionDB();
       header('location:../../index.php?message=Vous êtes inscrit à la sortie.');
