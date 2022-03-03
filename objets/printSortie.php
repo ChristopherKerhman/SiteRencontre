@@ -61,14 +61,6 @@ class PrintSortie extends GetSorties {
   public function InscriptionSortie($data) {
     echo '<div class="gallery">';
       foreach ($data as $key => $value) {
-      // Recherche si l'utilisateur bloque la personne qui recherche.
-      $searchBloc = "SELECT `id_Bloc` FROM `exclusion` WHERE `id_User` = :id_User OR `id_bloc` = :id_Bloc";
-      $parametre = [['prep'=>':id_User', 'variable'=>$_SESSION['idUser']],['prep'=>':id_Bloc', 'variable'=>$value['id_User']]];
-      $controle = new readDB($searchBloc, $parametre);
-      $dataTraiter = $controle->read();
-
-      if (($dataTraiter == array())||($dataTraiter[0]['id_Bloc'] == $_SESSION['idUser'])) {
-
         $count = "SELECT COUNT(`idRencontre`) AS `nbr` FROM `rencontres` WHERE `id_Sortie` = :idSortie";
         $param = [['prep'=>':idSortie', 'variable'=>$value['idSortie']]];
         $counter = new readDB($count, $param);
@@ -119,13 +111,62 @@ class PrintSortie extends GetSorties {
         }
         echo'</ul>';
         echo'</div>';
-
       }
-      }
-          echo '</div>';
-    // fin Recherche si l'utilisateur bloque la personne qui recherche.
-
+      echo '</div>';
   }
+public function printInscription($value) {
+  $count = "SELECT COUNT(`idRencontre`) AS `nbr` FROM `rencontres` WHERE `id_Sortie` = :idSortie";
+  $param = [['prep'=>':idSortie', 'variable'=>$value['idSortie']]];
+  $counter = new readDB($count, $param);
+  $dataCount = $counter->read();
+  echo '<div class="item">
+  <ul class="message">
+  <li><h4>'.$value['titreSortie'].'</h4></li>
+  <li><strong>Créer par : '.$value['login'].'</strong></li>
+  <li><strong>'.$value['typeSortie'].'</strong></li>
+  <li><p>
+  '.$value['texteSortie'].'
+  </p></li>
+  <strong><li>Personnes inscrite :'.$dataCount[0]['nbr'].'/'.$value['nombreMax'].'</li>
+  <li>Date '.brassageDate($value['dateSortie']).'</li>
+  <li>Heure du rendez-vous : '.heure($value['heureSortie']).'</li>
+  <li>Prix : '.$value['prix'].' €</li></strong>
+  <li>Adresse du rendez-vous : '.$value['lieu'].'</li>
+  <li>';
+  // utilisateur déjà enregistré ?
+  $recherche = "SELECT `id_User` FROM `rencontres` WHERE `id_Sortie` = :idSortie AND `id_User` = :idUser";
+  $param = [['prep'=>':idSortie', 'variable'=>$value['idSortie']], ['prep'=>':idUser', 'variable'=>$this->idUser]];
+  $detection = new readDB($recherche, $param);
+  $dataTraiter = $detection->read();
+  if($dataCount[0]['nbr'] >= $value['nombreMax']) {
+        echo '<strong>Sortie complète</strong>';
+  } else {
+    if ($dataTraiter == array()){
+    echo '<form action="CUD/Create/inscriptionSortie.php" method="post">
+      <input type="hidden" name="id_Sortie" value="'.$value['idSortie'].'" />
+      <button type="submit" name="button">S\'inscrire</button>
+    </form>';
+  } else {
+    echo '<strong>Vous êtes déjà inscrit</strong>';
+  }
+  }
+  echo'</li>';
+  echo '<li><strong>Les personnes inscrites :</strong></li>';
+  //Personnes inscrites à la sortie
+  $liste = "SELECT `login`
+  FROM `rencontres`
+  INNER JOIN `users` ON `idUser` = `id_User`
+  WHERE `id_Sortie` = :id_Sortie";
+  $param = [['prep'=>'id_Sortie', 'variable'=>$value['idSortie']]];
+  $inscrit = new readDB($liste, $param);
+  $dataTraiter = $inscrit->read();
+  foreach ($dataTraiter as $key => $value) {
+    echo '<li>'.$value['login'].'</li>';
+  }
+  echo'</ul>';
+  echo'</div>';
+}
+
   public function deinscriptionSortie($data, $idNav) {
         echo '<div class="gallery">';
     foreach ($data as $key => $value) {

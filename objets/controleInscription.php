@@ -14,4 +14,18 @@ class Controle {
     }
     return $test;
   }
+  public function exclusion ($idUser, $idOrga) {
+    $sql = "SELECT `id_User` FROM `exclusion` WHERE `id_Bloc` = :idUser";
+    $param = [['prep'=>':idUser', 'variable'=>$idUser]];
+    $action = new readDB($sql, $param);
+    $dataListe = $action->read();
+    foreach ($dataListe as $key => $valeur) {
+      if(($valeur['id_User'] == $idOrga)) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+  }
+
 }

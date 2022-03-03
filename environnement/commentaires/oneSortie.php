@@ -19,7 +19,6 @@ $oneSortie->InscriptionSortie($dataTraiter);
   </div>
 </form>
 <?php
-
   //On sort les données lier aux commentaires de la sortie
   $commentaires = new PrintCommentaires();
   $dataCommentaires = $commentaires->commentaireSortie ($idSortie);

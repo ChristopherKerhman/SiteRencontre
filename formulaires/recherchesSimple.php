@@ -3,6 +3,8 @@ include 'securite/zonePrive.php';
 $dateDujour = date('y-m-d');
 require 'objets/getSorties.php';
 require 'objets/printSortie.php';
+require 'objets/controleInscription.php';
+
  ?>
 <article class="ligne">
 <form v-if="cle" class="colonne" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?idNav='.$idNav; ?>" method="post">
@@ -65,7 +67,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     </ul>
     </div></div>';
   } else {
-    $affichageSorties->InscriptionSortie($dataSortie);
+    $controle = new Controle();
+    echo '<div class="gallery">';
+    foreach ($dataSortie as $key => $value) {
+          $check = $controle->exclusion ($_SESSION['idUser'], $value['id_User']);
+          if ($check == 0) {
+            $affichageSorties->printInscription($value);
+          }
+    }
+    echo '</div>';
+
+    //$affichageSorties->InscriptionSortie($dataSortie);
   }
 } else {
   echo '<div class="gallery">
