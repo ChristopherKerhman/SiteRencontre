@@ -217,7 +217,7 @@ th {
 }
 .lienSite {
   font-family: 'Luckiest Guy', cursive;
-  font-size: 0.8em;
+  font-size: 1em;
   text-transform: uppercase;
   text-decoration: none;
   color: #713426;
@@ -235,6 +235,7 @@ th {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 10px, rgba(0, 0, 0, 0.12) 0px 10px 10px, rgba(0, 0, 0, 0.12) 0px 10px 10px, rgba(0, 0, 0, 0.17) 0px 10px 10px,
   rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
+
 /*Fin navigation haut fin*/
 
 /*Position*/
