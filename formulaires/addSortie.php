@@ -4,9 +4,10 @@
   <label for="titreSortie">Titre de votre sortie</label>
   <input id="titreSortie" type="text" name="titreSortie" placeholder="Titre de votre sortie" required>
 
-<div id="GRATUIT">
+
     <label for="texteSortie">Description de votre sortie (255 caractère maximum)</label>
-  <textarea id="texteSortie" v-model="texteSortie" name="texteSortie" rows="8" cols="80"></textarea>
+  <textarea id="texteSortie" name="texteSortie" rows="8" cols="80"></textarea>
+  <div id="GRATUIT">
   <ul id="price">
 <li>
   <label for="gratuit">La sortie est elle gratuite ?</label>
