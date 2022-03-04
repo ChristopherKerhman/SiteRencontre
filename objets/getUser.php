@@ -1,7 +1,7 @@
 <?php
 class GetUser {
   public function getOneUser($idUser) {
-    $selectOneUser = "SELECT `idUser`, `nom`, `prenom`, `login`, `valide`, `role`, `email`, `genre`
+    $selectOneUser = "SELECT `idUser`, `nom`, `prenom`, `login`, `valide`, `role`, `email`, `genre`, `departement`
     FROM `users` WHERE `idUser` = :idUser";
     $param = [['prep'=>':idUser', 'variable'=>$idUser]];
     $traitement = new readDB($selectOneUser, $param);

@@ -34,57 +34,31 @@ class FicheUser {
     </ul>';
   }
   public function administrationFiche () {
-
-if($this->valide == 0) {
-  echo '<form class="formulaire" action="CUD/Update/ficheUser.php" method="post">
-          <label for="nom">Nom</label>
-          <input id="nom" type="text" name="nom" value="'.$this->nom.'">
-          <label for="prenom">Prenom</label>
-          <input id="prenom" type="text" name="prenom" value="'.$this->prenom.'">
-          <label for="login">Login</label>
-          <input id="login" type="text" name="login" value="'.$this->login.'">
-          <label for="valide">Compte valide ?</label>
-          <select di="valide" name="valide">';
-            for ($i=0; $i < count($this->yes) ; $i++) {
-              if($i == $this->valide) {
-                echo '<option value="'.$i.'" selected>'.$this->yes[$i].'</option>';
-              } else {
-              echo '<option value="'.$i.'">'.$this->yes[$i].'</option>';
-              }
-            }
-
-          echo '</select>
-          <label for="role">Role ?</label>
-          <select name="role">';
+    echo '<form class="formulaire" action="administration/ficheUser.php" method="post">
+            <label for="nom">Nom</label>
+            <input id="nom" type="text" name="nom" value="'.$this->nom.'">
+            <label for="prenom">Prenom</label>
+            <input id="prenom"  type="text" name="prenom" value="'.$this->prenom.'">
+            <label for="login">Login</label>
+            <input id="login"  type="text" name="login" value="'.$this->login.'">
+            <input type="hidden" name="idUser" value="'.$this->idUser.'" />
+            <label for="valide">Supprimer le compte ?</label>
+            <select id="valide" name="valide">
+            <option value="0">Oui</option>
+            <option value="1" selected>Non</option>
+            </select>
+            <label for="role">Rôle ?</label>
+            <select name="role">';
             for ($i=0; $i <count($this->roles) ; $i++) {
               if($i == $this->role) {
                 echo '<option value="'.$i.'" selected>'.$this->roles[$i].'</option>';
               } else {
-              echo '<option value="'.$i.'">'.$this->roles[$i].'</option>';
+                  echo '<option value="'.$i.'">'.$this->roles[$i].'</option>';
               }
             }
-          echo'</select>
-        <input type="hidden" name="idUser" value="'.$this->idUser.'" />
-        <button type="submit" name="button">Modifier fiche</button>
-        <form action="CUD/Delette/user.php" method="post">
-              <input type="hidden" name="idUser" value="'.$this->idUser.'" />
-              <button type="submit" name="button">Effacer</button>
-          </form>  </form>';
-} else {
-  $compte = "SELECT COUNT(`idRestriction`) AS `nbr` FROM `exclusion` WHERE `id_Bloc` = :idUser";
-  $param = [['prep'=>':idUser', 'variable'=>  $this->idUser]];
-  $aligement = new readDB($compte, $param);
-  $comportements = $aligement->read();
-  $launch = $comportements[0]['nbr'];
-  echo '<ul>
-  <li>login : '.$this->login.'</li>
-  <li>Nom : '.$this->nom.'</li>
-  <li>prenom : '.$this->prenom.'</li>
-  <li>Compte valide : Oui</li>
-  <li>Rôle : '.$this->roles[$this->role].'</li>
-  <li>Nombre de personne qui ont bloqué '.$this->login.' : '.$launch.'/10</li>
-  </ul>';
-}
+            echo'</select>
+            <button  type="submit" name="button">Modifier fiche</button>
+      </form>';
   }
   public function modUserFiche () {
     echo '<form class="formulaire" action="CUD/Update/ficheUser.php" method="post">
@@ -94,7 +68,7 @@ if($this->valide == 0) {
             <input id="prenom"  type="text" name="prenom" value="'.$this->prenom.'">
             <label for="login">Login</label>
             <input id="login"  type="text" name="login" value="'.$this->login.'">
-            <input type="hidden" name="idUser" value="'.$this->idUser.'" />
+
             <label for="codePostal">Numéro du département de résidence ?</label>
             <select id="codePostal" name="departement">';
             for ($i=1; $i <= 103 ; $i++) {
