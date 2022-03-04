@@ -4,6 +4,13 @@ include '../enteteCUD.php';
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 //Création des contrôles
 $dateDuJour = date('Y-m-d');
+// Vérification de la taille du champs texteSortie
+$texteSortie = filter($_POST['texteSortie']);
+if (strlen($texteSortie) > 255){
+    header('location:../../index.php?message=Taille du texte de description trop longue.');
+} 
+
+// Fin de vérification
 if(filter($_POST['dateSortie'])< $dateDuJour) {
   header('location:../../index.php?message=Problème de choix dans la date.');
 } else {
@@ -14,6 +21,7 @@ if(filter($_POST['dateSortie'])< $dateDuJour) {
 if ($ok > 0) {
     header('location:../../index.php?message=Au moins un champs est vide.');
 } else {
+
   // Préparation des paramètre
 $preparation = new Preparation();
 $parametre = $preparation->creationPrepIdUser($_POST);

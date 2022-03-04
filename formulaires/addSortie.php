@@ -3,9 +3,10 @@
   <h3>Créer une nouvelle sortie <?=$_SESSION['login']; ?> ?</h3>
   <label for="titreSortie">Titre de votre sortie</label>
   <input id="titreSortie" type="text" name="titreSortie" placeholder="Titre de votre sortie" required>
-  <label for="texteSortie">Description de votre sortie</label>
-  <textarea id="texteSortie" name="texteSortie" rows="8" cols="80"></textarea>
+
 <div id="GRATUIT">
+    <label for="texteSortie">Description de votre sortie (255 caractère maximum)</label>
+  <textarea id="texteSortie" v-model="texteSortie" name="texteSortie" rows="8" cols="80"></textarea>
   <ul id="price">
 <li>
   <label for="gratuit">La sortie est elle gratuite ?</label>
@@ -36,9 +37,13 @@
   <select id="codePostal" name="codePostal">
     <?php
     for ($i=1; $i <= 103 ; $i++) {
-      echo '<option value="'.$i.'">'.$i.'</option>';
-    }
+      if ($i == $_SESSION['departement']) {
+          echo '<option value="'.$i.'" selected>'.$i.'</option>';
+      } else {
+          echo '<option value="'.$i.'">'.$i.'</option>';
+      }
 
+    }
      ?>
   </select>
 <div>
