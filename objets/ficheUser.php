@@ -100,22 +100,6 @@ if($this->valide == 0) {
             <button  type="submit" name="button">Modifier fiche</button>
       </form>';
   }
-  public function listeBloc () {
-    $param = [['prep'=>':idUser', 'variable'=>  $this->idUser]];
-    $sql = "SELECT `idRestriction`,`login`, `id_Bloc`
-    FROM `exclusion`
-    INNER JOIN `users` ON `idUser` = `id_Bloc`
-    WHERE `id_User` = :idUser";
-    $liste = new readDB($sql, $param);
-    $dataTraiter = $liste->read();
-    echo '<ul id="ficheProfil"><li><strong>Personne bloqué</strong></li>';
-    if($dataTraiter == array()) {
-      echo '<li>Pas encore de personnes bloqués</li>';
-    }
-    foreach ($dataTraiter as $key => $value) {
-      echo '<li>'.$value['login'].'=>'.$value['id_Bloc'].'</li>';
-    }
-    echo'</ul>';
-  }
+
 }
 ?>

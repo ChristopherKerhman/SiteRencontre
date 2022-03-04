@@ -14,11 +14,4 @@ class Controle {
     }
     return $test;
   }
-  public function exclusion ($idUser, $idOrga) {
-    $sql = "SELECT `id_User` FROM `exclusion` WHERE `id_Bloc` = :idUser";
-    $param = [['prep'=>':idUser', 'variable'=>$idUser]];
-    $action = new readDB($sql, $param);
-    $dataListe = $action->read();
-    return in_array($idOrga, $dataListe);
-  }
 }

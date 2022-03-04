@@ -70,10 +70,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $controle = new Controle();
     echo '<div class="gallery">';
     foreach ($dataSortie as $key => $value) {
-          $check = $controle->exclusion ($_SESSION['idUser'], $value['id_User']);
-          if ($check == 0) {
             $affichageSorties->printInscription($value);
-          }
     }
     echo '</div>';
 
