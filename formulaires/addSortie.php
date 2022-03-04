@@ -3,11 +3,12 @@
   <h3>Créer une nouvelle sortie <?=$_SESSION['login']; ?> ?</h3>
   <label for="titreSortie">Titre de votre sortie</label>
   <input id="titreSortie" type="text" name="titreSortie" placeholder="Titre de votre sortie" required>
+  <div id="GRATUIT" class="formulaire">
+    <label for="texteSortie">Description de votre sortie (<strong v-if="texte.length>255" class="red">{{texte.length}}/255</strong><strong v-else class="noRed">{{texte.length}}/255</strong> caractère maximum)</label>
+    <textarea id="texteSortie" name="texteSortie" v-model="texte" rows="8" cols="80" required></textarea>
 
 
-    <label for="texteSortie">Description de votre sortie (255 caractère maximum)</label>
-  <textarea id="texteSortie" name="texteSortie" rows="8" cols="80"></textarea>
-  <div id="GRATUIT">
+
   <ul id="price">
 <li>
   <label for="gratuit">La sortie est elle gratuite ?</label>
@@ -88,7 +89,8 @@ $dataTypesSortie = $triTypesSorties->read();
   const GRATUIT = Vue.createApp({
     data () {
       return {
-      gratuit: 0
+      gratuit: 0,
+      texte: ''
       }
     }
   })

@@ -127,6 +127,13 @@ h4 {
 .texteCenter {
   text-align: center;
 }
+.red {
+  color: red;
+  font-weight: normal;
+}
+.noRed {
+    font-weight: normal;
+}
 form {
   margin-bottom: 1em;
 }
