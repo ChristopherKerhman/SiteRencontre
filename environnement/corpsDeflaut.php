@@ -15,6 +15,6 @@ if (empty($_SESSION['idUser'])) {
   $limit = 6;
   $valide = 1;
   $lastSortie = new PrintSortie();
-  $dataTraiter = $lastSortie->lastSortie($limit, $valide);
+  $dataTraiter = $lastSortie->lastSortiePerso($limit, $valide, $_SESSION['departement']);
   $lastSortie->affichageSortieGeneral ($dataTraiter, $_SESSION['idUser']);
 }
