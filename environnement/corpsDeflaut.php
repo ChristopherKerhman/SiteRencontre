@@ -1,14 +1,20 @@
 <?php
 require 'objets/getSorties.php';
 require 'objets/printSortie.php';
+require 'objets/controleInscription.php';
 // Déclaration des variables
-$limit = 10;
-$valide = 1;
+
 if (empty($_SESSION['idUser'])) {
-  $_SESSION['idUser'] = 0;
-$lastSortie =  new PrintSortie();
-} else {
+  $_SESSION['idUser'] = NULL;
+  $limit = 10;
+  $valide = 1;
   $lastSortie =  new PrintSortie();
+  $dataTraiter = $lastSortie->lastSortie($limit, $valide);
+  $lastSortie->affichageSortie($dataTraiter);
+} else {
+  $limit = 6;
+  $valide = 1;
+  $lastSortie = new PrintSortie();
+  $dataTraiter = $lastSortie->lastSortie($limit, $valide);
+  $lastSortie->affichageSortieGeneral ($dataTraiter, $_SESSION['idUser']);
 }
-$dataTraiter = $lastSortie->lastSortie($limit, $valide);
-$lastSortie->affichageSortie($dataTraiter, $_SESSION['idUser']);

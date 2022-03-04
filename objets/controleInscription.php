@@ -19,13 +19,6 @@ class Controle {
     $param = [['prep'=>':idUser', 'variable'=>$idUser]];
     $action = new readDB($sql, $param);
     $dataListe = $action->read();
-    foreach ($dataListe as $key => $valeur) {
-      if(($valeur['id_User'] == $idOrga)) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }
+    return in_array($idOrga, $dataListe);
   }
-
 }

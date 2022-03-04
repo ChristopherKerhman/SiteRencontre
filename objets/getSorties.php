@@ -7,7 +7,7 @@ class GetSorties {
     $this->yes = ['Non', 'Oui'];
   }
   public function lastSortie($limit, $valide) {
-    $selectSortie = "SELECT `idSortie`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
+    $selectSortie = "SELECT `idSortie`, `id_User` ,`login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
     `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`
     FROM `sorties`
     INNER JOIN `users` ON `idUser` = `id_User`

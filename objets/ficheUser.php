@@ -102,7 +102,7 @@ if($this->valide == 0) {
   }
   public function listeBloc () {
     $param = [['prep'=>':idUser', 'variable'=>  $this->idUser]];
-    $sql = "SELECT `idRestriction`,`login`
+    $sql = "SELECT `idRestriction`,`login`, `id_Bloc`
     FROM `exclusion`
     INNER JOIN `users` ON `idUser` = `id_Bloc`
     WHERE `id_User` = :idUser";
@@ -113,7 +113,7 @@ if($this->valide == 0) {
       echo '<li>Pas encore de personnes bloqués</li>';
     }
     foreach ($dataTraiter as $key => $value) {
-      echo '<li>'.$value['login'].'</li>';
+      echo '<li>'.$value['login'].'=>'.$value['id_Bloc'].'</li>';
     }
     echo'</ul>';
   }
