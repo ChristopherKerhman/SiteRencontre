@@ -7,6 +7,7 @@ class FicheUser {
   private $login;
   private $valide;
   private $role;
+  private $departement;
 
   public function __construct($dataUser) {
     $this->idUser = $dataUser[0]['idUser'];
@@ -15,6 +16,7 @@ class FicheUser {
     $this->login = $dataUser[0]['login'];
     $this->valide = $dataUser[0]['valide'];
     $this->role = $dataUser[0]['role'];
+    $this->departement = $dataUser[0]['departement'];
     $this->roles = $roles = ['Non valide', 'utilisateur', 'gestionnaire', 'administrateur'];
     $this->yes = $yes = ['Non', 'Oui'];
   }
@@ -27,6 +29,7 @@ class FicheUser {
     <li>Login : '.$this->login.'</li>
     <li>valide : '.$this->yes[$this->valide].'</li>
     <li>Role : '.$this->roles[$this->role].'</li>
+    <li>Departement : '.$this->departement.'</li>
 
     </ul>';
   }
@@ -92,6 +95,17 @@ if($this->valide == 0) {
             <label for="login">Login</label>
             <input id="login"  type="text" name="login" value="'.$this->login.'">
             <input type="hidden" name="idUser" value="'.$this->idUser.'" />
+            <label for="codePostal">Numéro du département de résidence ?</label>
+            <select id="codePostal" name="departement">';
+            for ($i=1; $i <= 103 ; $i++) {
+              if($i == $this->departement) {
+                  echo '<option value="'.$i.'" selected>'.$i.'</option>';
+              } else {
+                  echo '<option value="'.$i.'">'.$i.'</option>';
+              }
+
+            }
+            echo'</select>
             <label for="valide">Supprimer mon compte ?</label>
             <select id="valide" name="valide">
             <option value="0">Oui</option>
@@ -100,6 +114,5 @@ if($this->valide == 0) {
             <button  type="submit" name="button">Modifier fiche</button>
       </form>';
   }
-
 }
 ?>

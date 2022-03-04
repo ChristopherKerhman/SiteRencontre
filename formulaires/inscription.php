@@ -3,6 +3,15 @@
       <h4>Votre identité</h4>
       <label for="login">Speudonyme sur le site</label>
       <input id="login" class="inputFormulaire" type="text" name="login" required>
+      <label for="codePostal">Numéro du département de résidence ?</label>
+      <select id="codePostal" name="departement">
+        <?php
+        for ($i=1; $i <= 103 ; $i++) {
+          echo '<option value="'.$i.'">'.$i.'</option>';
+        }
+
+         ?>
+      </select>
       <label for="nom">Nom</label>
       <input id="nom" class="inputFormulaire" type="text" name="nom" required>
       <label for="prenom">Prenom</label>
@@ -21,6 +30,7 @@
         <label for="CGU">Accepter les CGU du site ?</label>
         <input type="checkbox" name="valide">
       </div>
+
     <button type="submit" name="button">Créer un compte</button>
 </form>
 <div id="VERROU" class="postion_button">

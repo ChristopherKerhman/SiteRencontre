@@ -1,7 +1,7 @@
 <?php
 include 'securite/zonePrive.php';
 $idUser = $_SESSION['idUser'];
-$requetteSQL = "SELECT `idUser`, `nom`, `prenom`, `login`, `valide`, `role`
+$requetteSQL = "SELECT `idUser`, `nom`, `prenom`, `login`, `valide`, `role`,`departement`
 FROM `users`
 WHERE `idUser` = :idUser";
 $parametreUser = [['prep'=> ':idUser', 'variable' => $idUser]];

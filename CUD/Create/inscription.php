@@ -35,17 +35,18 @@ if(filter($_POST['valide'] === NULL)) {
     // fin de génération du token
       $preparation =  new Preparation();
       $param = $preparation->creationPrep($_POST);
-      $insertUser = "INSERT INTO `users`(`login`, `nom`, `prenom`, `email`, `genre`, `mdp`, `token`)
-      VALUES (:login, :nom, :prenom, :email, :genre, :mdp, :token)";
-      $insert = new CurDB($insertUser, $param);
+      $insertUser = "INSERT INTO `users`(`login`, `departement`, `nom`, `prenom`, `email`, `genre`, `mdp`, `token`)
+      VALUES (:login, :departement, :nom, :prenom, :email, :genre, :mdp, :token)";
+      print_r($param);
+    $insert = new CurDB($insertUser, $param);
 
-     $action = $insert->actionDB();
+    $action = $insert->actionDB();
      /*
      $to = filter($_POST['email']);
      $subject = 'Votre token d'activation';
      $message = 'Bonjour ; Votre token .$_POST['token']';
      */
-      header('location:../../index.php?message=Utilisateur enregistré vous devriez recevoir un mail avec votre token pour activer votre compte.');
+    header('location:../../index.php?message=Utilisateur enregistré vous devriez recevoir un mail avec votre token pour activer votre compte.');
 
   }
 

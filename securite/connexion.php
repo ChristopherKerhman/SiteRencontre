@@ -12,7 +12,7 @@ include $cheminCUD.'fonctionsDB.php';
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $login = filter($_POST['login']);
   $moria = $_POST['motDePasse'];
-  $requetteSQL = "SELECT `idUser`, `login`, `mdp`, `valide`, `role`
+  $requetteSQL = "SELECT `idUser`, `login`, `mdp`, `valide`, `role`, `departement`
   FROM `users`
   WHERE `login` = :login";
   $prepare = [['prep'=> ':login', 'variable' => $login]];
@@ -25,6 +25,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['role'] = $dataUser[0]['role'];
     $_SESSION['login']= $dataUser[0]['login'];
     $_SESSION['valide'] = $dataUser[0]['valide'];
+    $_SESSION['departement'] = $dataUser[0]['departement'];
     //Archiver automatiquement à la connexion
     $archivage = "UPDATE `sorties` SET `passer`=1 WHERE `dateSortie`< :dDay AND `passer` = 0";
     $param = [['prep'=>':dDay', 'variable'=>date('Y-m-d')]];
