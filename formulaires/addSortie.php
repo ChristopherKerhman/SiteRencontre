@@ -6,9 +6,6 @@
   <div id="GRATUIT" class="formulaire">
     <label for="texteSortie">Description de votre sortie (<strong v-if="texte.length>255" class="red">{{texte.length}}/255</strong><strong v-else class="noRed">{{texte.length}}/255</strong> caractère maximum)</label>
     <textarea id="texteSortie" name="texteSortie" v-model="texte" rows="8" cols="80" required></textarea>
-
-
-
   <ul id="price">
 <li>
   <label for="gratuit">La sortie est elle gratuite ?</label>
@@ -85,14 +82,4 @@ $dataTypesSortie = $triTypesSorties->read();
 </div>
   <button type="submit" name="button">Créer</button>
 </form>
-<script>
-  const GRATUIT = Vue.createApp({
-    data () {
-      return {
-      gratuit: 0,
-      texte: ''
-      }
-    }
-  })
-  GRATUIT.mount('#GRATUIT')
-</script>
+<?php include 'javascript/gratuit.php'; ?>

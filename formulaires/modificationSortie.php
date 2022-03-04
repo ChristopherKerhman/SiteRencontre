@@ -10,9 +10,9 @@ $dataSortie = $oneSortie->oneSortie($idSortie);
    <h3>Modifier une sortie <?=$_SESSION['login']; ?> ?</h3>
    <label for="titreSortie">Titre de votre sortie</label>
    <input id="titreSortie" type="text" name="titreSortie" value="<?=$dataSortie[0]['titreSortie']?>" required>
-   <label for="texteSortie">Description de votre sortie</label>
-   <textarea id="texteSortie" name="texteSortie" rows="8" cols="80"><?=$dataSortie[0]['texteSortie']?></textarea>
- <div id="GRATUIT">
+     <div id="GRATUIT" class="formulaire">
+  <label for="texteSortie">Description de votre sortie (<strong v-if="texte.length>255" class="red">{{texte.length}}/255</strong><strong v-else class="noRed">{{texte.length}}/255</strong> caractère maximum)</label>
+   <textarea id="texteSortie" name="texteSortie" v-model="texte" rows="8" cols="80"></textarea>
    <ul id="price">
  <li>
    <label for="gratuit">La sortie est elle gratuite ? <?php if($dataSortie[0]['gratuit'] > 0) {echo 'Non';} else { echo 'Oui'; } ?></label>
@@ -122,7 +122,8 @@ $dataSortie = $oneSortie->oneSortie($idSortie);
    const GRATUIT = Vue.createApp({
      data () {
        return {
-       gratuit: 0
+       gratuit: 0,
+       texte: '<?=$dataSortie[0]['texteSortie']?>'
        }
      }
    })
