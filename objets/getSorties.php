@@ -20,6 +20,22 @@ class GetSorties {
     $dataSortie = $listeSortie->read();
     return $dataSortie;
   }
+  public function lastSortiePerso($limit, $valide, $departement) {
+    $selectSortie = "SELECT `idSortie`, `id_User` ,`login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
+    `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`
+    FROM `sorties`
+    INNER JOIN `users` ON `idUser` = `id_User`
+    INNER JOIN `types` ON `type` = `idTypeSortie`
+    WHERE `sorties`.`valide` = :valide AND `partager` = 1 AND `adult` = 0 AND `dateSortie` >= :dayday AND `codePostal` = :departement
+    ORDER BY `dateSortie` ASC
+    LIMIT {$limit}";
+    $param=[['prep'=>':valide', 'variable'=>$valide],
+    ['prep'=>':dayday', 'variable'=>$this->date],
+    ['prep'=>':departement', 'variable'=>$departement]];
+    $listeSortie = new readDB($selectSortie, $param);
+    $dataSortie = $listeSortie->read();
+    return $dataSortie;
+  }
   public function sortieCreateByUser() {
     $selectSortie = "SELECT `idSortie`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
     `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`
@@ -72,6 +88,26 @@ class GetSorties {
     ORDER BY `dateSortie`
     LIMIT {$limit}";
     $param=[['prep'=>':codePostale', 'variable'=>$codePostale],
+            ['prep'=>':dateSortie', 'variable'=>$date]];
+    $listeSortie = new readDB($selectSortie, $param);
+    $dataSortie = $listeSortie->read();
+    return $dataSortie;
+  }
+  public function triSortieType($limit, $codePostale, $date, $type) {
+    $selectSortie = "SELECT `idSortie`, `id_User`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
+    `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`
+    FROM `sorties`
+    INNER JOIN `users` ON `idUser` = `id_User`
+    INNER JOIN `types` ON `type` = `idTypeSortie`
+    WHERE `sorties`.`valide` = 1
+    AND `partager` = 1
+    AND `type` = :typeSortie
+    AND `codePostal` = :codePostale
+    AND `dateSortie` >= :dateSortie
+    ORDER BY `dateSortie`
+    LIMIT {$limit}";
+    $param=[['prep'=>':typeSortie', 'variable'=>$type],
+            ['prep'=>':codePostale', 'variable'=>$codePostale],
             ['prep'=>':dateSortie', 'variable'=>$date]];
     $listeSortie = new readDB($selectSortie, $param);
     $dataSortie = $listeSortie->read();
