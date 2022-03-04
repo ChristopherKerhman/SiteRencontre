@@ -16,5 +16,5 @@ if (empty($_SESSION['idUser'])) {
   $valide = 1;
   $lastSortie = new PrintSortie();
   $dataTraiter = $lastSortie->lastSortiePerso($limit, $valide, $_SESSION['departement']);
-  $lastSortie->affichageSortieGeneral ($dataTraiter, $_SESSION['idUser']);
+  $lastSortie->InscriptionSortie($dataTraiter);
 }

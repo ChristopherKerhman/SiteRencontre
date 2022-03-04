@@ -112,21 +112,20 @@ class GetSorties {
     $dataSortie = $listeSortie->read();
     return $dataSortie;
   }
-
-  public function getMysortie() {
+public function getMysortie() {
     $tri = "SELECT `idRencontre`, `idSortie`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
     `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`, `login`
     FROM `rencontres`
     INNER JOIN `sorties` ON `id_Sortie` = `idSortie`
     INNER JOIN `types` ON `type` = `idTypeSortie`
     INNER JOIN `users` ON `idUser` = `sorties`.`id_User`
-    WHERE `rencontres`.`id_User` = :idUser AND `sorties`.`valide` = 1";
+    WHERE `rencontres`.`id_User` = :idUser AND `sorties`.`valide` = 1 AND `passer` = 0";
     $param = [['prep'=>':idUser', 'variable'=>$this->idUser]];
     $listeSortie = new readDB($tri, $param);
     $dataSortie = $listeSortie->read();
     return $dataSortie;
   }
-  public function oneSortie($idSortie) {
+public function oneSortie($idSortie) {
     $selectSortie = "SELECT `idSortie`, `login`, `id_User`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
     `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`, `type`
     FROM `sorties`
