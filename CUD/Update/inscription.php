@@ -7,9 +7,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $test = new Controle();
     $testLogin = $test->doublon($sql, $preparation , $valeur);
     if ($testLogin == 1) {
-      $upDate = "UPDATE `users` SET `valide`=1,`role`=1,`token`= 0 WHERE `token` = :token";
+      $upDate = "UPDATE `users` SET `valide`=1,`role`=1,`token`= NULL WHERE `token` = :token";
         array_pop($_POST);
-        print_r($_POST);
        $preparation =  new Preparation();
        $param = $preparation->creationPrep($_POST);
        $insert = new CurDB($upDate, $param);

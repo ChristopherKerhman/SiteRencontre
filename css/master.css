@@ -335,6 +335,9 @@ label {
   flex-direction: column;
   margin-left: 2em;
 }
+.largeur {
+  width: 25%;
+}
 .ligne {
   display: flex;
   flex-direction: row;
