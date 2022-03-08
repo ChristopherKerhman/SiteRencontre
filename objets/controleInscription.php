@@ -14,4 +14,15 @@ class Controle {
     }
     return $test;
   }
+  public function blocageIdSortie($idSortie) {
+    $sql = "SELECT `id_UserBloc` FROM `blocage` WHERE `id_User` = 14 AND `id_UserBloc` IN (SELECT `id_User` FROM `rencontres` WHERE `id_Sortie` = 75)";
+    $param = [['prep' => ':idUser', 'variable' => $_SESSION['idUser']], ['prep' => ':idSortie', 'variable' => $dataSortie]];
+    $action = new readDB($sql, $param);
+    $dataListe = $action->read();
+    if($dataListe != array()) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 }
