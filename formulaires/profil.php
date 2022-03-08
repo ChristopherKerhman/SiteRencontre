@@ -12,7 +12,8 @@ require 'objets/preparationRequette.php';
 $affichage = new ficheUser ($dataUser);
 ?>
 <div class="flexCenter">
-<?php $affichage->fiche();
-$affichage->modUserFiche();
+<?php
+  $affichage->fiche();
+  $affichage->modUserFiche();
  ?>
 </div>

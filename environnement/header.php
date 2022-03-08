@@ -5,6 +5,9 @@ $pass = 1;
 // Fin Pass Sanitaire
 $titre = "Faite vous des amis !";
 $sousTitre = "Une amitiés dure le temps d'une rencontre ou toute la vie";
+if(!empty($_SESSION['login'])) {
+  $sousTitre = 'Une amitiés dure le temps d\'une rencontre ou toute la vie '.$_SESSION['login'].'.';
+}
 function filter($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -57,4 +60,3 @@ $idNav = $dataNav[0]['idNav'];
         </nav>
   </header>
 <main>
-  

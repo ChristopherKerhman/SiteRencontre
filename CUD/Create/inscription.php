@@ -7,8 +7,8 @@ require '../../objets/preparationRequette.php';
 include '../fonctionsDB.php';
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Controle Formulaire en amont
-if(filter($_POST['valide'] === NULL)) {
-  header('location:../../index.php?message=Il faut accepter les CGU pour créer un compte.');
+if(filter($_POST['valide'] === NULL) || (filter($_POST['majeur'] == 0))) {
+  header('location:../../index.php?message=Il faut accepter les CGU pour créer un compte et être majeur.');
 } else {
 
   // Contrôle doublon de login et de mail dans la DB
@@ -35,8 +35,8 @@ if(filter($_POST['valide'] === NULL)) {
     // fin de génération du token
       $preparation =  new Preparation();
       $param = $preparation->creationPrep($_POST);
-      $insertUser = "INSERT INTO `users`(`login`, `departement`, `nom`, `prenom`, `email`, `genre`, `mdp`, `token`)
-      VALUES (:login, :departement, :nom, :prenom, :email, :genre, :mdp, :token)";
+      $insertUser = "INSERT INTO `users`(`login`, `departement`, `nom`, `prenom`, `email`, `genre`, `mdp`, `majeur`,`token`)
+      VALUES (:login, :departement, :nom, :prenom, :email, :genre, :mdp, :majeur, :token)";
       print_r($param);
     $insert = new CurDB($insertUser, $param);
 

@@ -27,8 +27,15 @@
       <label for="mdp">Mot de passe</label>
       <input id="mdp" class="inputFormulaire" type="text" name="mdp" required>
       <div>
+        <label for="majeur">Etes vous majeur ?</label>
+        <select id="majeur" name="majeur">
+          <option value="0">Non</option>
+          <option value="1">Oui</option>
+        </select>
         <label for="CGU">Accepter les CGU du site ?</label>
         <input type="checkbox" name="valide">
+
+
       </div>
 
     <button type="submit" name="button">Créer un compte</button>
