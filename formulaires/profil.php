@@ -17,3 +17,11 @@ $affichage = new ficheUser ($dataUser);
   $affichage->modUserFiche();
  ?>
 </div>
+<div id="VERROU">
+  Voir les <strong class="lienVueJS" v-if="!cle3" v-on:click="cle3 = true">CGU</strong> <strong class="lienVueJS" v-else v-on:click="cle3 = false">CGU</strong> du site ?
+<aside v-if="cle3">
+  <?php include 'dataStatic/cgu.php'; ?>
+</aside>
+</div>
+</div>
+<?php include 'javascript/verrou.php'; ?>

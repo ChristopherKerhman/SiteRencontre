@@ -6,8 +6,7 @@ $LienCentrale = new LienCentrale($role, $centrale, $idNav);
 $dataNav = $LienCentrale->NavCentrale();
  ?>
 <h3>Moteurs de recherches</h3>
-  <ul>
+
     <?php
-    $LienCentrale->affichageLien($dataNav);
+    $LienCentrale->affichageLienCentrale($dataNav);
      ?>
-  </ul>

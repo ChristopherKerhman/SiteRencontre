@@ -26,4 +26,11 @@ class LienCentrale {
    }
    echo '</ul>';
  }
+ public function affichageLienCentrale($data) {
+   echo '<ul class="colonne">';
+   foreach ($data as $key => $value) {
+     echo '<li class="lienNav"><a class="lienCentrale" href="index.php?idNav='.$value['idNav'].'">'.$value['nomLien'].'</a></li>';
+   }
+   echo '</ul>';
+ }
 }

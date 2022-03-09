@@ -41,22 +41,31 @@ $idNav = $dataNav[0]['idNav'];
 <html lang="fr" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="rencontres, amicales, France, française, cinémas, randonnées, jeux, boire un verre">
     <link rel="stylesheet" href="css/master.css">
     <script src="<?php echo $vueJSCDN; ?>"></script>
     <title><?=$titre?></title>
   </head>
   <body>
-  <header class="flex-center">
+  <header id="MOBILE" class="flex-center">
     <h1><?=$titre?></h1>
       <h2><?=$sousTitre?></h2>
-        <nav>
+        <nav v-if="!cle">
           <ul class="listNav">
             <?php
               foreach ($dataNav as $key) {
                 echo '<li><a class="lienSite" href="index.php?idNav='.$key['idNav'].'">'.$key['nomLien'].'</a></li>';
               }
              ?>
+             <li id="smart" class="lienSite" v-on:click="cle = true">Fermer menu</li>
+          </ul>
+        </nav>
+        <nav v-else>
+          <ul class="listNav">
+             <li id="smart" class="lienSite" v-on:click="cle = false">Ouvrir menu</li>
           </ul>
         </nav>
   </header>
 <main>
+<?php include 'javascript/mobile.php'; ?>

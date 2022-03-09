@@ -1,3 +1,4 @@
+<div id="VERROU">
 <form class="formulaire" action="CUD/Create/inscription.php" method="post">
       <h3>Formulaire d'inscription</h3>
       <h4>Votre identité</h4>
@@ -32,20 +33,24 @@
           <option value="0">Non</option>
           <option value="1">Oui</option>
         </select>
-        <label for="CGU">Accepter les CGU du site ?</label>
-        <input type="checkbox" name="valide">
 
+        <label for="CGU">Accepter les <strong class="lienVueJS" v-if="!cle3" v-on:click="cle3 = true">CGU</strong> <strong class="lienVueJS" v-else v-on:click="cle3 = false">CGU</strong> du site ?</label>
+        <input id="CGU" type="checkbox" name="valide">
 
       </div>
 
     <button type="submit" name="button">Créer un compte</button>
 </form>
-<div id="VERROU" class="postion_button">
+<div class="postion_button">
     <button v-show="!cle" type="button" name="button" v-on:click="cle = true">Activer votre compte</button>
       <form v-if="cle" class="formulaire"  action="CUD/Update/inscription.php" method="post">
         <label for="token">Token de sécurité ?</label>
         <input type="password" name="token" required>
         <button type="submit" name="button">Activer votre compte</button>
       </form>
+</div>
+<aside v-if="cle3">
+  <?php include 'dataStatic/cgu.php'; ?>
+</aside>
 </div>
 <?php include 'javascript/verrou.php'; ?>
