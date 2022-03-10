@@ -152,6 +152,26 @@ article {
 .message li{
   margin-bottom: 0.5em;
 }
+.messagerie {
+  list-style: none;
+  font-size: 1.2em;
+
+}
+.messagerie li {
+  margin-bottom: 1em;
+  margin-left: 2em;
+}
+.lienTextuel {
+  text-decoration: none;
+  color: #D6BF74;
+}
+.lienTextuel:hover {
+  text-decoration: underline;
+}
+.texteLisible {
+  font-size: 1.5em;
+  text-align: justify;
+}
 /*Class lier au liste*/
 /*Positionnement texte*/
 .centre {
@@ -471,6 +491,32 @@ nav ul li {
     display: flex;
 }
   /*Header*/
+  /*Formulaire*/
+  .formulaire {
+    font-size: 0.8em;
+    align-items: stretch;
+  }
+label input select{
+  font-size: 0.8em;
+}
+#lieu {
+  width: auto;
+}
+.smartLine {
+  display: flex;
+  flex-direction: column;
+}
+  /*Formulaire*/
+/*Lien interne*/
+.lienCentrale {
+    font-size: 1em;
+  }
+/*Lien interne*/
+/*Moteur de recherche*/
+.ligne {
+  flex-direction: column;
+}
+/*Moteur de recherche*/
   /*Gallerie des sorties*/
   .gallery {
     display: flex;

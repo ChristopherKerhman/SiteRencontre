@@ -45,7 +45,7 @@
     }
      ?>
   </select>
-<div>
+<div class="smartLine">
 <label for="adult">Sortie interdit aux mineurs ?</label>
 <select name="adult">
   <option value="0" selected>Non</option>

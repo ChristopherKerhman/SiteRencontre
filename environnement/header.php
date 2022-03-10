@@ -8,12 +8,7 @@ $sousTitre = "Une amitiés dure le temps d'une rencontre ou toute la vie";
 if(!empty($_SESSION['login'])) {
   $sousTitre = 'Une amitiés dure le temps d\'une rencontre ou toute la vie '.$_SESSION['login'].'.';
 }
-function filter($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
+include 'CUD/fonctionsDB.php';
 $vueJSCDN = 'node_modules/vue/dist/vue.global.prod.js';
 require 'objets/paramDB.php';
 require 'objets/readDB.php';
