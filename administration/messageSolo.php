@@ -4,5 +4,5 @@ require 'objets/printMessagerie.php';
 $message =  new PrintMessagerie();
 $idContact = filter($_GET['idContact']);
 $dataMessage = $message->getOneMessage($idContact);
-$message->affichageOneMessage ($dataMessage);
+$message->affichageOneMessage ($dataMessage, $idNav);
  ?>
