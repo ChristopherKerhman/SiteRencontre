@@ -6,8 +6,8 @@ $idSortie = filter($_GET['idSortie']);
 $oneSortie = new PrintSortie();
 $dataSortie = $oneSortie->oneSortie($idSortie);
  ?>
- <form class="formulaire" action="CUD/Update/sortie.php" method="post">
-   <h3>Modifier une sortie <?=$_SESSION['login']; ?> ?</h3>
+ <form class="formulaire" action="CUD/Create/sortie.php" method="post">
+   <h3>Relancer la sortie <?=$dataSortie[0]['titreSortie']?> ?</h3>
    <label for="titreSortie">Titre de votre sortie</label>
    <input id="titreSortie" type="text" name="titreSortie" value="<?=$dataSortie[0]['titreSortie']?>" required>
      <div id="GRATUIT" class="formulaire">
@@ -17,12 +17,12 @@ $dataSortie = $oneSortie->oneSortie($idSortie);
  <li>
    <label for="gratuit">La sortie est elle gratuite ? <?php if($dataSortie[0]['gratuit'] > 0) {echo 'Non';} else { echo 'Oui'; } ?></label>
      <select id="gratuit" name="gratuit" v-model="gratuit" value="<?=$dataSortie[0]['gratuit']?>">
-       <?php if($dataSortie[0]['gratuit'] >0) {
-         echo '    <option value="0" >Oui</option>
-              <option value="1" selected>Non</option>';
+       <?php if($dataSortie[0]['gratuit'] > 0) {
+         echo '<option value="0">Oui</option>
+              <option value="1">Non</option>';
        } else {
-         echo '    <option value="0" selected>Oui</option>
-              <option value="1" >Non</option>';
+         echo '<option value="0">Oui</option>
+              <option value="1" selected>Non</option>';
        } ?>
 
      </select>
@@ -37,9 +37,9 @@ $dataSortie = $oneSortie->oneSortie($idSortie);
  <label for="nombreMax">Nombre de personne maximum ?</label>
  <input id="nombreMax" type="number" name="nombreMax" min="3" max="120" value="<?=$dataSortie[0]['nombreMax']?>"> personnes</div>
    <h4>Date et heure </h4>
- <label for="dateHeureSortie">Date de la sortie ?</label>
- <input type="date" name="dateSortie" min="<?php echo date('Y-m-d'); ?>" value="<?=$dataSortie[0]['dateSortie']?>" required>
- <label for="heureSortie">Heure du rendez-vous ?</label>
+ <label for="dateHeureSortie">Nouvelle date de la sortie ?</label>
+<input type="date" name="dateSortie" min="<?php echo date('Y-m-d'); ?>" value="<?php echo date('Y-m-d'); ?>" required>
+ <label for="heureSortie">Nouvelle heure du rendez-vous ?</label>
  <input id="heureSortie" type="time" name="heureSortie" value="<?=$dataSortie[0]['heureSortie']?>" required>
  </div>
    <h4>Adresse </h4>
@@ -59,7 +59,7 @@ $dataSortie = $oneSortie->oneSortie($idSortie);
 
       ?>
    </select>
- <div>
+   <div>
  <label for="adult">Sortie interdit aux mineurs ?</label>
  <select name="adult">
    <?php if($dataSortie[0]['adult'] >0) {
@@ -114,8 +114,6 @@ $dataSortie = $oneSortie->oneSortie($idSortie);
    } ?>
  </select>
  </div>
-  <input type="hidden" name="idSortie" value="<?=$dataSortie[0]['idSortie']?>">
- <input type="hidden" name="idNav" value="<?=$idNav?>">
-   <button type="submit" name="button">Modifier</button>
- </form>
+   <button type="submit" name="button">Créer à nouveau</button>
+</form>
 <?php include 'javascript/javaSortie.php'; ?>

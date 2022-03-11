@@ -34,15 +34,15 @@ class GetSorties {
     $dataSortie = $listeSortie->read();
     return $dataSortie;
   }
-  public function sortieCreateByUser() {
+  public function sortieCreateByUser($passer) {
     $selectSortie = "SELECT `idSortie`, `login`, `titreSortie`, `texteSortie`, `gratuit`, `prix`, `passSanitaire`,
     `nombreMax`, `dateSortie`, `heureSortie`, `dateCreation`, `lieu`, `codePostal`, `adult`, `sorties`.`valide`, `partager`, `typeSortie`
     FROM `sorties`
     INNER JOIN `users` ON `idUser` = `id_User`
     INNER JOIN `types` ON `idTypeSortie` = `type`
-    WHERE `sorties`.`valide` = 1 AND `id_User` = :idUser
+    WHERE `sorties`.`valide` = 1 AND `id_User` = :idUser AND `passer` = :passer
     ORDER BY `dateSortie`, `heureSortie`";
-    $param = [['prep'=>':idUser', 'variable'=>$this->idUser]];
+    $param = [['prep'=>':idUser', 'variable'=>$this->idUser],['prep'=>':passer', 'variable'=>$passer]];
     $listeSortie = new readDB($selectSortie, $param);
     $dataSortie = $listeSortie->read();
     return $dataSortie;
