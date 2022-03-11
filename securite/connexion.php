@@ -26,6 +26,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['login']= $dataUser[0]['login'];
     $_SESSION['valide'] = $dataUser[0]['valide'];
     $_SESSION['departement'] = $dataUser[0]['departement'];
+    $_SESSION['RGP'] = true;
     //Archiver automatiquement à la connexion
     $archivage = "UPDATE `sorties` SET `passer`=1 WHERE `dateSortie`< :dDay AND `passer` = 0";
     $param = [['prep'=>':dDay', 'variable'=>date('Y-m-d')]];

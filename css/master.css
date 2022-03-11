@@ -125,7 +125,7 @@ h4 {
 #message {
   font-family: serif;
   color: red;
-  font-size: 2em;
+  font-size: large;
 }
 .texteCenter {
   text-align: center;
@@ -442,6 +442,32 @@ aside ul {
   border-radius: 5px;
   }
 /*==Mosaïque==*/
+/*==Modal==*/
+#RGPD {
+text-align: center;
+color: red;
+}
+.rgpd {
+display: flex;
+flex-direction: column;
+opacity: 1;
+width: 350px;
+height: 150px;
+font-size: 0.9em;
+border-radius: 5px;
+position: absolute;
+top: 25%;
+left: 30%;
+font-size: 1em;
+background-color: #1C343D;
+color: red;
+order: 0;
+border: 2px solid #e9c46aff;
+text-align: justify;
+
+}
+
+
 /*=Breakpoint=*/
 @media only screen and (max-width: 900px) {
   /*ROUGE*/
