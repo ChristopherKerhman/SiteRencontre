@@ -223,15 +223,17 @@ table {
   font-size: 1.2em;
 }
 tr {
-  height: 2em;
-}
-td {
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  height: auto;
 }
 th {
-  padding-bottom: 0.5em;
+  padding: 0.5em;
+  border: 1px solid #FFB441;
 }
+td {
+  padding: 0.5em;
+  text-align: center;
+}
+
 /*Navigation haut*/
 .listNav {
   display: flex;

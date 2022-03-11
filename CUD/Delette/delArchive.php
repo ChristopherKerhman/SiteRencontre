@@ -5,7 +5,7 @@ include '../../securite/securiterCreateur.php';
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 $idNav = filter($_POST['idNav']);
 $parametre = [];
-$update = "DELETE FROM `sorties` WHERE `passer` = 1";
+$update = "DELETE FROM `sorties` WHERE `passer` = 1 AND `valide` = 0";
 $insert = new CurDB($update, $parametre);
 $action = $insert->actionDB();
 header('location:../../index.php?message=Archive supprimée&idNav='.$idNav);

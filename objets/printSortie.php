@@ -279,7 +279,8 @@ public function printInscription($value) {
     echo '<tr>
       <th>Nom sortie</th>
       <th>Créateur</th>
-      <th>Compte valide ?</th>
+      <th>Compte valide</th>
+      <th>Sortie valide</th>
       <th>Type</th>
       <th>Date</th>
       <th>Voir</th>
@@ -290,19 +291,13 @@ public function printInscription($value) {
         <td>'.$value['titreSortie'].'</td>
         <td>'.$value['login'].'</td>
         <td>'.$yes[$value['UV']].'</td>
+        <td>'.$yes[$value['valide']].'</td>
         <td>'.$value['typeSortie'].'</td>
         <td>'.brassageDate($value['dateSortie']).'</td>
         <td><a class="lienSite" href="index.php?idNav=34&idSortie='.$value['idSortie'].'">Voir</a></td>';
         // Traitement conditionnelle des actions
         if ($value['valide'] == 1) {
           $message = 'Pas de suppression possible.';
-          if (($value['passer'] == 1)&&($value['valide'] == 1)) {
-            $message = '<form class="" action="CUD/Delette/adminSortie.php" method="post">
-              <input type="hidden" name="idSortie" value="'.$value['idSortie'].'">
-              <input type="hidden" name="idNav" value="'.$idNav.'">
-               <button type="submit" name="button">Supprimer</button>
-            </form>';
-          }
         } else {
             $message = '<form class="" action="CUD/Delette/adminSortie.php" method="post">
               <input type="hidden" name="idSortie" value="'.$value['idSortie'].'">
