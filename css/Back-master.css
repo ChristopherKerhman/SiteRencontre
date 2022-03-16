@@ -470,40 +470,12 @@ text-align: justify;
 
 /*=Breakpoint=*/
 @media only screen and (max-width: 900px) {
-  /*Paysage*/
-  h1 {
-    font-size: 1.4em;
+  /*ROUGE*/
+  body {
+    background-color: red;
   }
-  h2 {
-      font-size: 1.2em;
-  }
-  h3 {
-      font-size: 1em;
-  }
-  h4 {
-      font-size: 0.9em;
-  }
-  .ligne {
+  nav {
     flex-direction: column;
-    font-size: 1em;
-  }
-  .listNav {
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.5em;
-  }
-  .lienCentrale {
-      font-size: 1.5em;
-      width: 100%;
-    }
-    .flexCenter {
-      flex-direction: column;
-    }
-  #smart {
-      display: flex;
-  }
-  .listNav li {
-    margin-bottom: 0.8em;
   }
   /*Gallerie des sorties*/
   .gallery {
@@ -511,25 +483,16 @@ text-align: justify;
     flex-direction: column;
   }
   .item {
+    min-height: auto;
+    min-width: auto;
   }
     /*Gallerie des sorties*/
-    .message  {
-        margin: 0;
-        align-content: center;
-        padding-left: 0.2em;
-        padding-right: 0.2em;
-      }
-  #ficheProfil {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: flex-start;
-  }
 }
 @media only screen and (max-width: 500px) {
-  /*Portrait*/
-
+  /*Portable verticale*/
+  body {
+    background-color: #1C343D;
+  }
   /*Header*/
 h1 {
   font-size: 1.4em;
@@ -572,7 +535,6 @@ nav ul li {
     font-size: 0.8em;
     align-items: stretch;
   }
-
 label input select{
   font-size: 0.8em;
 }
@@ -604,13 +566,6 @@ label input select{
   .item {
     min-height: auto;
     min-width: auto;
-    align-items: center;
-  }
-.message  {
-    margin: 0;
-    align-content: center;
-    padding-left: 0.2em;
-    padding-right: 0.2em;
   }
     /*Gallerie des sorties*/
 }
