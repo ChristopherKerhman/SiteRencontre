@@ -39,12 +39,14 @@ function redirect($data, $idNav) {
 }
 function genToken ($size) {
     $alpha = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    for ($i=0; $i < 2 ; $i++) {
+        $alpha = str_shuffle($alpha).$alpha;
+    }
     $token = NULL;
     for ($i=0 ; $i < $size  ; $i++ ) {
-      $number = rand(0, strlen($alpha));
+      $number = rand(1, strlen($alpha));
       $letter = substr($alpha, $number, 1);
       $token = $token.$letter;
-      //$token =  $token.substr($alpha, rand(0,strlen($alpha)));
     }
     return $token;
 }

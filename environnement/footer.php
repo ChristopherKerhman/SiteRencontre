@@ -1,6 +1,6 @@
 
 </main>
-<footer>
+<footer class="parallax-effect">
 <nav>
 
 Copyrigth &copy; <?=date('Y')?> &nbsp;

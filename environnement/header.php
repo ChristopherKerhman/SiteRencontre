@@ -43,10 +43,10 @@ $idNav = $dataNav[0]['idNav'];
     <title><?=$titre?></title>
   </head>
   <body>
-  <header id="MOBILE" class="flex-center">
+  <header id="MOBILE" class="flex-center ">
     <h1><?=$titre?></h1>
       <h2><?=$sousTitre?></h2>
-        <nav v-if="!cle">
+        <nav v-if="!cle" class="parallax-effect">
           <ul class="listNav">
             <?php
               foreach ($dataNav as $key) {
